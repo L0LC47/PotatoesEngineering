@@ -1,5 +1,12 @@
 package it.univr.is.observer.persistenza;
 
+import it.univr.is.database.MioDriver;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /*email character varying(50) PRIMARY KEY,
  nome character varying(20),
  cognome character varying(20),
@@ -7,7 +14,7 @@ package it.univr.is.observer.persistenza;
  gestore SMALLINT NOT NULL DEFAULT 1*/
 
 public class Usr {
-	
+
 	// ==== Field
 	// ========================================================================
 
@@ -28,6 +35,14 @@ public class Usr {
 		this.password = password;
 		this.gestore = gestore;
 	}
+	
+	public Usr(ResultSet rs) throws SQLException{
+		this.email = rs.getString("email");
+		this.nome = rs.getString("nome");
+		this.cognome = rs.getString("cognome");
+		this.password = rs.getString("password");
+		this.gestore = rs.getInt("gestore");
+	}
 
 	public Usr() {
 		this.gestore = 1;
@@ -35,14 +50,34 @@ public class Usr {
 
 	// ==== Methods
 	// ========================================================================
-	
+
 	/**
 	 * ritorno l'elenco dei veicoli associati all'email "email"
+	 * 
 	 * @return
 	 */
-	
+	public List<Veicolo> getUserVeicoli(String email) {
+		List<Veicolo> res = new ArrayList<Veicolo>();
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "select v.targa, v.marca, v.modello, v.gestore from "
+					+ "usr_veicolo uv, veicolo v where uv.targa = v.targa and "
+					+ "uv.inizio < current_date and (uv.fine >= current_date "
+					+ "OR uv.fine is null) and uv.email = ?";
+			Object[] params = new Object[1];
+			params[0] = email;
+			ResultSet rs = driver.execute(query, params);
+			while(rs.next())
+			res.add(new Veicolo(rs));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 	/**
 	 * torno i dati dell'utente con email "email"
+	 * 
 	 * @return
 	 */
 

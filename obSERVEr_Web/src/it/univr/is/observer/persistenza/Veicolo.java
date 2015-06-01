@@ -1,5 +1,8 @@
 package it.univr.is.observer.persistenza;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /*
  targa char(7) PRIMARY KEY,
  marca varchar(20),
@@ -9,7 +12,7 @@ package it.univr.is.observer.persistenza;
  */
 
 public class Veicolo {
-	
+
 	// ==== Field
 	// ========================================================================
 
@@ -21,7 +24,7 @@ public class Veicolo {
 
 	// ==== Constructor
 	// ========================================================================
-	
+
 	public Veicolo(String targa, String marca, String modello, String gestore,
 			String guidatore) {
 
@@ -30,6 +33,14 @@ public class Veicolo {
 		this.modello = modello;
 		this.gestore = gestore;
 		this.guidatore = guidatore;
+	}
+
+	public Veicolo(ResultSet rs) throws SQLException {
+		this.targa = rs.getString("targa");
+		this.marca = rs.getString("marca");
+		this.modello = rs.getString("modello");
+		this.gestore = rs.getString("gestore");
+		this.guidatore = rs.getString("guidatore");
 	}
 
 	public Veicolo() {
@@ -41,9 +52,10 @@ public class Veicolo {
 
 	/**
 	 * Ritorno i dati del veicolo con targa "targa"
+	 * 
 	 * @return
 	 */
-	
+
 	// ==== Getter & Setter
 	// ========================================================================
 

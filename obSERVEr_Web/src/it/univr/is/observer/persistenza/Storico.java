@@ -1,5 +1,14 @@
 package it.univr.is.observer.persistenza;
 
+import it.univr.is.database.MioDriver;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /*
  observer char(10) PRIMARY KEY,
  usr character varying(50),
@@ -18,19 +27,28 @@ public class Storico {
 	private String targa;
 	private int velocita;
 	private String posizione;
-	private int istante;
+	private Timestamp istante;
 
 	// ==== Constructor
 	// ========================================================================
 
 	public Storico(String observer, String usr, String targa, int velocita,
-			String posizione, int istante) {
+			String posizione, Timestamp istante) {
 		this.observer = observer;
 		this.usr = usr;
 		this.targa = targa;
 		this.velocita = velocita;
 		this.posizione = posizione;
 		this.istante = istante;
+	}
+
+	public Storico(ResultSet rs) throws SQLException {
+		this.observer = rs.getString(0);
+		this.usr = rs.getString(1);
+		this.targa = rs.getString(2);
+		this.velocita = rs.getInt(3);
+		this.posizione = rs.getString(4);
+		this.istante = rs.getTimestamp(5);
 	}
 
 	public Storico() {
@@ -40,10 +58,43 @@ public class Storico {
 	// ==== Methods
 	// ========================================================================
 
-	/*
-	 * Ritorno un vettore di stringhe contenente le posizione memorizzate per la
-	 * macchina "targa" nel giorno selezionato
+	public String toString(ResultSet rs) throws SQLException {
+		String res = "";
+		res += rs.getString(0);
+		res += rs.getString(1);
+		res += rs.getString(2);
+		res += rs.getInt(3);
+		res += rs.getString(4);
+		res += rs.getTimestamp(5);
+		return res;
+	}
+
+	/**
+	 * Ritorno un vettore di stringhe contenente le righe rappresentanti lo
+	 * storico del veicolo "targa" nel giorno selezionato
+	 *
+	 * @param targa
+	 * @param giorno
+	 * @return
 	 */
+	public List<String> getStorico(String targa, Date giorno) {
+		List<String> res = new ArrayList<String>();
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			// TODO: test date(timestamp)
+			String query = "select * from storico where targa = ? and istante = date(?)";
+			Object[] params = new Object[2];
+			params[0] = targa;
+			params[1] = giorno;
+			ResultSet rs = driver.execute(query, params);
+			// TODO: to string oppure new Storico()?
+			while (rs.next())
+				res.add(toString(rs));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 	// ==== Getter & Setter
 	// ========================================================================
@@ -88,11 +139,11 @@ public class Storico {
 		this.posizione = posizione;
 	}
 
-	public int getIstante() {
+	public Timestamp getIstante() {
 		return istante;
 	}
 
-	public void setIstante(int istante) {
+	public void setIstante(Timestamp istante) {
 		this.istante = istante;
 	}
 
