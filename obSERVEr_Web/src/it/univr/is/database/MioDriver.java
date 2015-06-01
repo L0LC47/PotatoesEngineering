@@ -52,7 +52,7 @@ public class MioDriver {
 		}
 	}
 
-	public MioDriver getInstance() {
+	public static MioDriver getInstance() {
 		return instance == null ? instance = new MioDriver() : instance;
 	}
 

@@ -34,11 +34,16 @@ public class Storico {
 	}
 
 	public Storico() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	// ==== Methods
 	// ========================================================================
+
+	/*
+	 * Ritorno un vettore di stringhe contenente le posizione memorizzate per la
+	 * macchina "targa" nel giorno selezionato
+	 */
 
 	// ==== Getter & Setter
 	// ========================================================================

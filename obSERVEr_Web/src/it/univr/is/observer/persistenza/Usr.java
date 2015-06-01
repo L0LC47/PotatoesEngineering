@@ -35,6 +35,16 @@ public class Usr {
 
 	// ==== Methods
 	// ========================================================================
+	
+	/**
+	 * ritorno l'elenco dei veicoli associati all'email "email"
+	 * @return
+	 */
+	
+	/**
+	 * torno i dati dell'utente con email "email"
+	 * @return
+	 */
 
 	// ==== Getter & Setter
 	// ========================================================================
