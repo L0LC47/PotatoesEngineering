@@ -10,9 +10,12 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +27,7 @@ public final class DataSource { //PATTERN: Singleton
     private Connection connection;
     private static DataSource instance;
 
-    private DataSource() { 
+    private DataSource() {
 
         // Caricamento driver
         try {
@@ -58,7 +61,7 @@ public final class DataSource { //PATTERN: Singleton
         return instance;
     }
 
-    public void Query(String s, short vel, String pos, Timestamp time) {
+    public void Update(String s, short vel, String pos, Timestamp time) {
         try {
             PreparedStatement pstmt = connection.prepareStatement(s);
             pstmt.setInt(1, Integer.valueOf(vel));
@@ -68,6 +71,27 @@ public final class DataSource { //PATTERN: Singleton
         } catch (SQLException e) {
             System.out.println(e.getMessage());//Non riesco a eseguire la query...");
         }
+    }
+
+    public String[] Query(String s, String serial) {
+        String[] res = new String[2];
+        ResultSet rs = null;
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(s);
+            pstmt.setString(1, serial);
+            rs = pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());//Non riesco a eseguire la query...");
+        }
+        try {
+            if (rs.next()) {
+                res[0] = rs.getString(1); //user
+                res[1] = rs.getString(2); //targa
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());//Result Set vuoto o non valido...");
+        }
+        return res;
     }
 
 }

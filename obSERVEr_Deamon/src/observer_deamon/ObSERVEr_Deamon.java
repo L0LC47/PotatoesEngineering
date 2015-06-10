@@ -23,16 +23,20 @@ public class ObSERVEr_Deamon {
         short vel;
         java.util.Date d = null;
         String pos;
-        String query = "INSERT INTO storico(observer, velocita, posizione, istante) VALUES (0000000042, ?, ?, ?)";
-
+        String[] res;
+        String serial = "44444ddddd";
+        String queryGet = "SELECT uv.email, vo.targa FROM usr_veicolo as uv, veicolo_observer as vo WHERE uv.targa = vo.targa AND vo.serial = ? AND vo.inizio < CURRENT_DATE AND (vo.fine >= CURRENT_DATE OR vo.fine IS NULL)";
+        res = ds.Query(queryGet, serial);
+        System.out.println(res[0] + res[1]);
+        String query = "INSERT INTO storico(observer, usr, targa, velocita, posizione, istante) VALUES ('" + serial + "', '" + res[0] + "' , '" + res[1] + "' , ?, ?, ?)";
         while (true) {
             Thread.sleep(1000);
-            d=new java.util.Date();
+            d = new java.util.Date();
             time = new Timestamp(d.getTime());
             //time = System.currentTimeMillis() / 1000;
             vel = (short) Math.floor((Math.random() * 200) + 1);
             pos = "01.123456,02.123456";
-            ds.Query(query, vel, pos, time);
+            ds.Update(query, vel, pos, time);
         }
 
     }
