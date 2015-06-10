@@ -1,5 +1,7 @@
 package it.univr.is.observer.persistenza;
 
+import it.univr.is.database.MioDriver;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -40,7 +42,7 @@ public class Veicolo {
 		this.marca = rs.getString("marca");
 		this.modello = rs.getString("modello");
 		this.gestore = rs.getString("gestore");
-		this.guidatore = rs.getString("guidatore");
+		this.guidatore = rs.getString("email");
 	}
 
 	public Veicolo() {
@@ -53,8 +55,24 @@ public class Veicolo {
 	/**
 	 * Ritorno i dati del veicolo con targa "targa"
 	 * 
+	 * @param targa
 	 * @return
 	 */
+	public Veicolo getVeicoloData(String targa) {
+		Veicolo res = null;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "select * from veicolo where targa = ?";
+			Object[] params = new Object[1];
+			params[0] = targa;
+			ResultSet rs = driver.execute(query, params);
+			if(rs.next())
+				res = new Veicolo(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 	// ==== Getter & Setter
 	// ========================================================================

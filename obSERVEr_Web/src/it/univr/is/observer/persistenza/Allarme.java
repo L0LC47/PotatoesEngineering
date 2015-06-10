@@ -44,12 +44,14 @@ public class Allarme {
 		int result = -1;
 		try {
 			MioDriver driver = MioDriver.getInstance();
-			String query = "select velocita from allarme where observer=?";
+			String query = "select velocita from allarme where observer = ?";
 			Object[] params = new Object[1];
 			params[0] = seriale;
 			ResultSet rs = driver.execute(query, params);
-			rs.next();
-			result = rs.getInt("velocita");
+			if (rs != null) {
+				rs.next();
+				result = rs.getInt("velocita");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -96,14 +98,14 @@ public class Allarme {
 		// Ottengo livello di privilegi dell'utente
 		try {
 			driver = MioDriver.getInstance();
-			query = "select veicolo.gestore from veicolo, usr_veicolo "
-					+ "where usr_veicolo.targa = veicolo.targa and "
-					+ "usr_veicolo = ?";
+			query = "select usr.gestore from usr where usr.email = ?";
 			params = new Object[1];
 			params[0] = email;
 			rs = driver.execute(query, params);
-			rs.next();
-			livelloPrivilegi = rs.getInt("gestore");
+			if (rs != null) {
+				rs.next();
+				livelloPrivilegi = rs.getInt("gestore");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -146,7 +148,7 @@ public class Allarme {
 				System.err.println("Errore inserimento");
 			}
 			rs = driver.execute(query, params);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -35,8 +35,8 @@ public class Usr {
 		this.password = password;
 		this.gestore = gestore;
 	}
-	
-	public Usr(ResultSet rs) throws SQLException{
+
+	public Usr(ResultSet rs) throws SQLException {
 		this.email = rs.getString("email");
 		this.nome = rs.getString("nome");
 		this.cognome = rs.getString("cognome");
@@ -45,30 +45,31 @@ public class Usr {
 	}
 
 	public Usr() {
-		this.gestore = 1;
+		this.gestore = 2;
 	}
 
 	// ==== Methods
 	// ========================================================================
 
 	/**
-	 * ritorno l'elenco dei veicoli associati all'email "email"
+	 * Ritorno l'elenco dei veicoli associati all'email "email"
 	 * 
+	 * @param email
 	 * @return
 	 */
-	public List<Veicolo> getUserVeicoli(String email) {
+	public static List<Veicolo> getUserVeicoliUtente(String email) {
 		List<Veicolo> res = new ArrayList<Veicolo>();
 		try {
 			MioDriver driver = MioDriver.getInstance();
-			String query = "select v.targa, v.marca, v.modello, v.gestore from "
+			String query = "select uv.email, v.targa, v.marca, v.modello, v.gestore from "
 					+ "usr_veicolo uv, veicolo v where uv.targa = v.targa and "
 					+ "uv.inizio < current_date and (uv.fine >= current_date "
 					+ "OR uv.fine is null) and uv.email = ?";
 			Object[] params = new Object[1];
 			params[0] = email;
 			ResultSet rs = driver.execute(query, params);
-			while(rs.next())
-			res.add(new Veicolo(rs));
+			while (rs.next())
+				res.add(new Veicolo(rs));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -76,10 +77,27 @@ public class Usr {
 	}
 
 	/**
-	 * torno i dati dell'utente con email "email"
+	 * Ritorno i dati dell'utente con email "email"
 	 * 
+	 * @param email
 	 * @return
 	 */
+	public static Usr getUserData(String email) {
+		Usr res = null;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "select * from usr where email = ?";
+			Object[] params = new Object[1];
+			params[0] = email;
+			ResultSet rs = driver.execute(query, params);
+			if (rs.next())
+				res = new Usr(rs);
+		} catch (SQLException e) {
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
 
 	// ==== Getter & Setter
 	// ========================================================================

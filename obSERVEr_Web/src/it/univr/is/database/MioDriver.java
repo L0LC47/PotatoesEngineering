@@ -24,26 +24,32 @@ public class MioDriver {
 	// Singleton
 	private MioDriver() {
 		// Caricamento driver
-		sDriver = myProperties.getProperty("dbmanager.driver");
+		//TODO perchè non trova le properties?
+		/*
+		 * sDriver = myProperties.getProperty("dbmanager.driver"); try {
+		 * InputStream is = new FileInputStream("jdbc.properties");
+		 * myProperties.load(is); } catch (Exception e) { e.printStackTrace();
+		 * 
+		 * } try { Class.forName(sDriver); } catch (ClassNotFoundException e) {
+		 * System.out.println("DatabaseManager unable to find Driver class");
+		 * System.exit(-1003); }
+		 * 
+		 * // Creazione connessione
+		 * 
+		 * sUrlDB = myProperties.getProperty("dbmanager.url"); sUserNameDB =
+		 * myProperties.getProperty("dbmanager.user"); sPasswordDB =
+		 * myProperties.getProperty("dbmanager.password");
+		 */
+
 		try {
-			InputStream is = new FileInputStream("jdbc.properties");
-			myProperties.load(is);
-		} catch (Exception e) {
-			e.printStackTrace();
-
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		try {
-			Class.forName(sDriver);
-		} catch (ClassNotFoundException e) {
-			System.out.println("DatabaseManager unable to find Driver class");
-			System.exit(-1003);
-		}
-
-		// Creazione connessione
-
-		sUrlDB = myProperties.getProperty("dbmanager.url");
-		sUserNameDB = myProperties.getProperty("dbmanager.user");
-		sPasswordDB = myProperties.getProperty("dbmanager.password");
+		sUrlDB = "jdbc:postgresql://dbserver.scienze.univr.it/dblab73";
+		sUserNameDB = "userlab73";
+		sPasswordDB = "sessantatreQE";
 		try {
 			connection = DriverManager.getConnection(sUrlDB, sUserNameDB,
 					sPasswordDB);
