@@ -98,6 +98,28 @@ public class Usr {
 		}
 		return res;
 	}
+	
+	
+	/**
+	 * Ritorno i dati di tutti gli "utenti"
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public static List<Usr> getUsers() {
+		List<Usr> res = new ArrayList<>();
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "select * from usr where gestore = 2";
+			ResultSet rs = driver.execute(query, null);
+			while (rs.next())
+				res.add(new Usr(rs));
+		} catch (SQLException e) {
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
 
 	// ==== Getter & Setter
 	// ========================================================================

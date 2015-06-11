@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
 				// TODO: MD5 password
 				HttpSession session = request.getSession(true);
 				session.setAttribute("currentSessionUser", user.getEmail());
+				session.setAttribute("currentUserPrivileges", user.getGestore());
 
 				 //setting session to expiry in 30 mins
 	            session.setMaxInactiveInterval(30*60);

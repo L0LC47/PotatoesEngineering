@@ -137,6 +137,9 @@ public class Storico {
 						+ "usr_veicolo uv, veicolo v where uv.targa = v.targa and "
 						+ "uv.inizio < current_date and (uv.fine >= current_date "
 						+ "OR uv.fine is null)";
+
+				params = null;
+				
 				break;
 			// se livelloPrivilegi = 1 -> GestoreFlotta
 			case 1:

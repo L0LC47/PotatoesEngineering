@@ -4,6 +4,10 @@
 <%
 	String currentUser = session.getAttribute("currentSessionUser")
 			.toString();
+
+int privileges = Integer.parseInt(session.getAttribute("currentUserPrivileges").toString());
+if (privileges > 0)
+    response.sendRedirect("accessoNegato.jsp");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
