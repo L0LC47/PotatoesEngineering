@@ -20,9 +20,8 @@
 <title>Visualizza allarmi</title>
 </head>
 <body>
-	Benvenuto nell'area riservata agli utenti registrati
-	<%=currentUser%>.
-	</br>
+	<h3>Elenco degli allarmi</h3>
+	<p></p>
 
 </body>
 </html>

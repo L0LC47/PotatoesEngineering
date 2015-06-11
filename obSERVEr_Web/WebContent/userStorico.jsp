@@ -23,30 +23,32 @@
 <title>Visualizza storico</title>
 </head>
 <body>
-	<p>Elenco dei veicoli nello storico</p>
+	<h3>Elenco dei veicoli nello storico</h3>
 	<p>Selezionare un veicolo per visualizzare le date in cui è stato
 		utilizzato</p>
 
 	<form action="userStoricoDate.jsp" method="POST">
 		<table>
 			<tr>
-				<td>Guidatore</td>
 				<td>Targa</td>
-				<td>Modello</td>
+				<td>Guidatore</td>
 				<td>Marca</td>
+				<td>Modello</td>
+
 			</tr>
 			<%
-				List<Veicolo> listaVeicoli = Storico.getUserVeicoliUtente(currentUser);
+				List<Veicolo> listaVeicoli = Usr.getUserVeicoliUtente(currentUser);
 			%>
 			<%
 				for(Veicolo veicolo : listaVeicoli){
 			%>
 			<tr>
-				<td><%=veicolo.getGuidatore()%></td>
 				<td><input type="submit" name="targa"
 					value="<%=veicolo.getTarga()%>"></td>
-				<td><%=veicolo.getModello()%></td>
+				<td><%=veicolo.getGuidatore()%></td>
 				<td><%=veicolo.getMarca()%></td>
+				<td><%=veicolo.getModello()%></td>
+
 			</tr>
 			<%
 				session.setAttribute("veicoloSelezionato", veicolo.getTarga());

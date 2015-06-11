@@ -1,9 +1,15 @@
 package it.univr.is.observer.persistenza;
 
 import it.univr.is.database.MioDriver;
+import it.univr.is.observer.logica.Statistica;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /*
  targa char(7) PRIMARY KEY,
@@ -66,12 +72,84 @@ public class Veicolo {
 			Object[] params = new Object[1];
 			params[0] = targa;
 			ResultSet rs = driver.execute(query, params);
-			if(rs.next())
+			if (rs.next())
 				res = new Veicolo(rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	/**
+	 * Ritorno i dati di tutti veicoli
+	 * 
+	 * @return
+	 */
+	public static List<Veicolo> getVeicoli() {
+		List<Veicolo> res = new ArrayList<>();
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "select * from veicolo";
+			ResultSet rs = driver.execute(query, null);
+			while (rs.next())
+				res.add(new Veicolo(rs));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	/**
+	 * Ritorno una matrice contenente le statistiche dei veicoli visibili
+	 * dall'utente email
+	 *
+	 * @param targa
+	 * @param inzio
+	 * @param fine
+	 * @return
+	 */
+	public static List<Integer> getStatisticheVeicolo(String targa,
+			String inizio, String fine) {
+
+		Date dataInizio = null;
+		Date dataFine = null;
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			dataInizio = formatter.parse(inizio);
+			dataFine = formatter.parse(fine);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		String query = "";
+		Object[] params = null;
+		MioDriver driver;
+		ResultSet rs = null;
+		List<Integer> velocita = new ArrayList<>();
+
+		try {
+			driver = MioDriver.getInstance();
+			query = "select s.velocita from "
+					+ "storico s where date(s.istante) >= ? "
+					+ "AND date(s.istante) <= ? AND s.targa = ?";
+			params = new Object[3];
+			params[0] = dataInizio;
+			params[1] = dataFine;
+			params[2] = targa;
+
+			rs = driver.execute(query, params);
+			while (rs.next())
+				// Popolo lista velocita
+				velocita.add(rs.getInt(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return velocita;
+	}
+
+	public static int getStatistica(List<Integer> velocita, Statistica s) {
+		return s.calcola(velocita);
 	}
 
 	// ==== Getter & Setter

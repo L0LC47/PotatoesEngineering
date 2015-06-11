@@ -25,12 +25,14 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class LoginServlet
  */
 public class LoginServlet extends HttpServlet {
+	
+	private static int LOW_PRIVILEGE = 2;
+	private static int HIGH_PRIVILEGE = 0;
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, java.io.IOException {
 
 		try {
-			// TODO: STATIC per forza???
 			Usr user = Usr.getUserData(request.getParameter("user"));
 
 			if (user != null
@@ -40,24 +42,14 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("currentSessionUser", user.getEmail());
 				session.setAttribute("currentUserPrivileges", user.getGestore());
 
-				 //setting session to expiry in 30 mins
-	            session.setMaxInactiveInterval(30*60);
+				// setting session to expiry in 30 mins
+				session.setMaxInactiveInterval(30 * 60);
 
-				// Generalizzato potrebbe essere:
-				// response.sendRedirect("userLogged.jsp");
-				switch (user.getGestore()) {
-				case 0:
-					response.sendRedirect("adminLogged.jsp");
-					break;
-				case 1:
-					response.sendRedirect("gestoreLogged.jsp");
-					break;
-				case 2:
+				if (user.getGestore() <= LOW_PRIVILEGE && user.getGestore() >= HIGH_PRIVILEGE)
 					response.sendRedirect("userLogged.jsp");
-					break;
-				default:
+				else
 					System.out.println("Not role user registered!");
-				}
+
 			} else
 				response.sendRedirect("invalidLogin.jsp"); // error page
 		}

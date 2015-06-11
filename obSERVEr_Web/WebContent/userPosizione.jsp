@@ -1,8 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%
-	String currentUser = session.getAttribute("currentSessionUser")
-			.toString();
+	pageEncoding="ISO-8859-1" import="it.univr.is.observer.persistenza.*"
+	import="java.util.*" import="java.sql.*"%>
+<%
+    String currentUser = "";
+    int privileges = Integer.MAX_VALUE;
+    int pagePrivileges = 2;
+    if(session.getAttribute("currentSessionUser") == null)
+        response.sendRedirect("Login.jsp");
+    else {
+        currentUser = session.getAttribute("currentSessionUser").toString();
+        privileges = Integer.parseInt(session.getAttribute("currentUserPrivileges").toString());
+        if (privileges > pagePrivileges)
+               response.sendRedirect("accessoNegato.jsp");
+    }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,9 +21,42 @@
 <title>Visualizza Posizione</title>
 </head>
 <body>
-	Benvenuto nell'area riservata agli utenti registrati
-	<%=currentUser%>.
-	</br>
+	<h3>Elenco dei veicoli</h3>
+	<p>Selezionare un veicolo per visualizzare la sua posizione corrente</p>
 
+	<form action="userPosizioneMappa.jsp" method="POST">
+		<table>
+			<tr>
+				<td>Targa</td>
+				<td>Guidatore</td>
+				<td>Marca</td>
+				<td>Modello</td>
+
+			</tr>
+			<%
+				List<Veicolo> listaVeicoli = Usr.getUserVeicoliUtente(currentUser);
+			%>
+			<%
+				for(Veicolo veicolo : listaVeicoli){
+			%>
+			<tr>
+				<td><input type="submit" name="targa"
+					value="<%=veicolo.getTarga()%>"></td>
+				<td><%=veicolo.getGuidatore()%></td>
+				<td><%=veicolo.getMarca()%></td>
+				<td><%=veicolo.getModello()%></td>
+
+			</tr>
+			<%
+				session.setAttribute("veicoloSelezionato", veicolo.getTarga());
+				java.sql.Date dataOdierna = new java.sql.Date(new java.util.Date().getTime());
+				session.setAttribute("dataOdierna", dataOdierna);
+			%>
+			<%
+				}
+			%>
+		</table>
+
+	</form>
 </body>
 </html>

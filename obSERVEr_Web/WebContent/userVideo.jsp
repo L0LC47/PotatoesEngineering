@@ -11,9 +11,7 @@
 <title>Visualizza video</title>
 </head>
 <body>
-	Benvenuto nell'area riservata agli utenti registrati
-	<%=currentUser%>.
-	</br>
-
+	<h3>Video del ladro</h3>
+	<p>LINK AL VIDEO</p>
 </body>
 </html>

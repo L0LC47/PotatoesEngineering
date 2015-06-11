@@ -19,13 +19,9 @@ public class UserServlet extends HttpServlet {
 
 		try {
 			HttpSession session = request.getSession(true);
-			String currentUser = session.getAttribute("currentSessionUser")
-					.toString();
+			
 			System.out.println("Sono la userservlet!");
-			List<Veicolo> listaVeicoli = Storico.getUserVeicoliUtente(currentUser);
-			System.out.println(listaVeicoli.size());
-			request.setAttribute("listaElenco", listaVeicoli);
-			System.out.println(listaVeicoli.get(0).getGuidatore());
+
 		}
 
 		catch (Throwable theException) {

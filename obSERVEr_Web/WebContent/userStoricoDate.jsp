@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="it.univr.is.observer.persistenza.*"
 	import="java.util.*"%>
-
-
-
 <%
 String currentUser = "";
 int privileges = Integer.MAX_VALUE;
@@ -32,14 +29,13 @@ else {
 <title>Visualizza date</title>
 </head>
 <body>
-<p>Elenco date in cui il veicolo è stato utilizzato</p>
+<h3>Elenco date in cui il veicolo è stato utilizzato</h3>
 	<p>Selezionare una data per visualizzare il percorso effettuato</p>
 
 	<form action="userStoricoMappa.jsp" method="POST">
 		<table>
 			<tr>
-				<td></td>
-				<td>Date utilizzo</td>
+				<td>Date in cui il mezzo è stato utilizzato</td>
 			</tr>
 			<%
 				List<Date> listaDate = Storico.getUserVeicoloDate(currentVeicolo);%>
