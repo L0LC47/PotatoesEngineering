@@ -15,6 +15,16 @@
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/LoginServlet</url-pattern>
 	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>StatisticheServlet</servlet-name>
+		<servlet-class>it.univr.is.observer.services.StatisticheServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>StatisticheServlet</servlet-name>
+		<url-pattern>/StatisticheServlet</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>UserServlet</servlet-name>

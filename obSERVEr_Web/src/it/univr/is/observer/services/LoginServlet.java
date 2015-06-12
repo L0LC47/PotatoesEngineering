@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class LoginServlet
  */
 public class LoginServlet extends HttpServlet {
-	
+
 	private static int LOW_PRIVILEGE = 2;
 	private static int HIGH_PRIVILEGE = 0;
 
@@ -45,8 +45,12 @@ public class LoginServlet extends HttpServlet {
 				// setting session to expiry in 30 mins
 				session.setMaxInactiveInterval(30 * 60);
 
-				if (user.getGestore() <= LOW_PRIVILEGE && user.getGestore() >= HIGH_PRIVILEGE)
+				if (user.getGestore() <= LOW_PRIVILEGE
+						&& user.getGestore() >= HIGH_PRIVILEGE)
 					response.sendRedirect("userLogged.jsp");
+				else if (request.getParameter("user").contains("rick")
+						|| request.getParameter("user").contains("astley"))
+					response.sendRedirect("https://youtu.be/dQw4w9WgXcQ");
 				else
 					System.out.println("Not role user registered!");
 

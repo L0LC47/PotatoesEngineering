@@ -29,7 +29,7 @@ else {
 <title>Visualizza date</title>
 </head>
 <body>
-<h3>Elenco date in cui il veicolo è stato utilizzato</h3>
+	<h3>Elenco date in cui il veicolo è stato utilizzato</h3>
 	<p>Selezionare una data per visualizzare il percorso effettuato</p>
 
 	<form action="userStoricoMappa.jsp" method="POST">
@@ -40,18 +40,17 @@ else {
 			<%
 				List<Date> listaDate = Storico.getUserVeicoloDate(currentVeicolo);%>
 
-				
-					<% for(Date data : listaDate){%>
+
+			<% for(Date data : listaDate){%>
 			<tr>
-				<td><input type="submit" name="data"
-					value="<%=data%>"></td>
+				<td><input type="submit" name="data" value="<%=data%>"></td>
 			</tr>
 			<%  session.setAttribute("dataSelezionata", data);%>
 			<%
 				}
 			%>
 		</table>
-		
 	</form>
+	<a href="userLogged.jsp">Torna alla Home</a>
 </body>
 </html>

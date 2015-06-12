@@ -65,7 +65,7 @@ public class Storico {
 		res += rs.getString(2);
 		res += rs.getInt(3);
 		res += rs.getString(4);
-		res += rs.getTimestamp(5)+"\n";
+		res += rs.getTimestamp(5) + "\n";
 		return res;
 	}
 
@@ -95,7 +95,25 @@ public class Storico {
 		}
 		return res;
 	}
-	
+
+	public static List<Storico> getAllarmi(String targa) {
+		List<Storico> res = new ArrayList<Storico>();
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			// TODO: test date(timestamp)
+			String query = "SELECT * FROM storico s, allarme a WHERE targa = ? "
+					+ "AND s.observer = a.observer AND s.velocita > a.velocita";
+			Object[] params = new Object[1];
+			params[0] = targa;
+			ResultSet rs = driver.execute(query, params);
+			while (rs.next())
+				res.add(new Storico(rs));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 	/**
 	 * Ritorno un vettore di stringhe contenente le righe rappresentanti lo
 	 * storico del veicolo "targa"
@@ -104,8 +122,7 @@ public class Storico {
 	 * @param giorno
 	 * @return
 	 */
-	
-	
+
 	public static List<Date> getUserVeicoloDate(String targa) {
 		List<Date> res = new ArrayList<Date>();
 		try {
@@ -114,15 +131,15 @@ public class Storico {
 			Object[] params = new Object[1];
 			params[0] = targa;
 			ResultSet rs = driver.execute(query, params);
-			while (rs.next()){
+			while (rs.next()) {
 				res.add(rs.getDate(1));
-			System.out.println(rs.getDate(1));}
+				System.out.println(rs.getDate(1));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return res;
 	}
-	
 
 	// ==== Getter & Setter
 	// ========================================================================

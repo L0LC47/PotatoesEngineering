@@ -32,6 +32,6 @@
 		<li><a href="modificaVeicolo.jsp">Modifica Veicolo</a></li>
 		<li><a href="eliminaVeicolo.jsp">Elimina Veicolo</a></li>
 	</ul>
-
+	<a href="userLogged.jsp">Torna alla Home</a>
 </body>
 </html>

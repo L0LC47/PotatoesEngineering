@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="it.univr.is.observer.persistenza.*"
-	import="java.util.*" import="java.sql.*"%>
+	import="java.util.*"%>
 <%
 	String currentUser = "";
 	int privileges = Integer.MAX_VALUE;
 	int pagePrivileges = 2;
+	String currentVeicolo = "";
+	Date currentDate = null;
 	if (session.getAttribute("currentSessionUser") == null)
 		response.sendRedirect("Login.jsp");
 	else {
@@ -14,52 +16,57 @@
 				"currentUserPrivileges").toString());
 		if (privileges > pagePrivileges)
 			response.sendRedirect("accessoNegato.jsp");
+		else {
+			if (session.getAttribute("veicoloSelezionato") == null)
+				response.sendRedirect("userPosizione.jsp");
+			else {
+				currentVeicolo = session.getAttribute(
+						"veicoloSelezionato").toString();
+				currentDate = (Date) session
+						.getAttribute("dataOdierna");
+			}
+		}
 	}
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Visualizza statistiche</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h3>Elenco dei veicoli</h3>
-	<p>Selezionare un veicolo e le date per vedere le relative
-		statistiche</p>
+	<h3>Allarmi attivati del veicolo selezionato</h3>
+	<p>Visualizza gli allarmi attivati dal veicolo selezionato</p>
 
-	<form action="StatisticheServlet" method="POST">
+	<form>
 		<table>
 			<tr>
-				<td>Targa</td>
-				<td>Guidatore</td>
-				<td>Marca</td>
-				<td>Modello</td>
-
+				<td>Posizione</td>
 			</tr>
 			<%
-				List<Veicolo> listaVeicoli = Usr.getUserVeicoliUtente(currentUser);
+				List<Storico> allarmi = Storico.getAllarmi(currentVeicolo);
 			%>
+
 			<%
-				for (Veicolo veicolo : listaVeicoli) {
+				for (Storico a : allarmi) {
 			%>
 			<tr>
-				<td><input type="submit" name="targa"
-					value="<%=veicolo.getTarga()%>"></td>
-				<td><%=veicolo.getGuidatore()%></td>
-				<td><%=veicolo.getMarca()%></td>
-				<td><%=veicolo.getModello()%></td>
-
+				<td><%="Guidatore"%></td>
+				<td><%="Data e Ora"%></td>
+				<td><%="Posizione"%></td>
+				<td><%="Velocità"%></td>
 			</tr>
-			<%
-				session.setAttribute("veicoloSelezionato", veicolo.getTarga());
-			%>
+			<tr>
+				<td><%=currentUser%></td>
+				<td><%=a.getIstante()%></td>
+				<td><%=a.getPosizione()%></td>
+				<td><%=a.getVelocita()%></td>
+			</tr>
 			<%
 				}
 			%>
-			<td><input type="date" name="dataInizio" required></td>
-			<td><input type="date" name="dataFine" required></td>
 		</table>
-		<input type="submit" value="Calcola">
 	</form>
 	<a href="userLogged.jsp">Torna alla Home</a>
 </body>

@@ -28,15 +28,15 @@
 	</br>
 	</br> Selezionare una funzionalità:
 	<ul>
-	   <%if(privileges == 0) {%>
-	    <li><a href="adminGestioneUtenti.jsp">Gestisci Utenti</a></li>
-        <li><a href="adminGestioneVeicoli.jsp">Gestisci Veicoli</a></li>
-       <%} if(privileges <= 1){ %>
-       <li><a href="gestoreAssociaUtentiVeicoli.jsp">Associa Utente
-                a Veicolo</a></li>
-        <li><a href="gestoreImpostaAllarmi.jsp">Imposta Allarme
-                Velocità</a></li>
-        <%} if(privileges <= 2) {%>
+		<%if(privileges == 0) {%>
+		<li><a href="adminGestioneUtenti.jsp">Gestisci Utenti</a></li>
+		<li><a href="adminGestioneVeicoli.jsp">Gestisci Veicoli</a></li>
+		<%} if(privileges <= 1){ %>
+		<li><a href="gestoreAssociaUtentiVeicoli.jsp">Associa Utente
+				a Veicolo</a></li>
+		<li><a href="gestoreImpostaAllarmi.jsp">Imposta Allarme
+				Velocità</a></li>
+		<%} if(privileges <= 2) {%>
 		<li><a href="userPosizione.jsp">Visualizza Posizione Veicoli</a></li>
 		<li><a href="userAllarmi.jsp">Controlla Allarmi Velocità</a></li>
 		<li><a href="userStorico.jsp">Visualizza Storico Viaggi
@@ -44,9 +44,8 @@
 		<li><a href="userVideo.jsp">Visualizza Video</a></li>
 		<li><a href="userStatistiche.jsp">Visualizza Statistiche</a></li>
 		<%} else {%>
-		      There is no spoon
+		There is no spoon
 		<% } %>
 	</ul>
-
 </body>
 </html>

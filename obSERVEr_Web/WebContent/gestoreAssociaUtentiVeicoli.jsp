@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="it.univr.is.observer.persistenza.*" %>
+	pageEncoding="ISO-8859-1" import="it.univr.is.observer.persistenza.*"%>
 <%
 	String currentUser = "";
 	int privileges = Integer.MAX_VALUE;
@@ -24,16 +24,15 @@
 	Benvenuto nell'area riservata aa gestori flotta e amministratori
 	<%=currentUser%>.
 	</br>
-	
+
 	</br>
-	</br>
-	Utenti
+	</br> Utenti
 	</br>
 	<select name="utenti">
-	   <%for (Usr u:Usr.getUsers()) { %>
-	   <option value="<%=u.getEmail() %>"><%=u.getEmail() %></option>
-	   <%}%>
+		<%for (Usr u:Usr.getUsers()) { %>
+		<option value="<%=u.getEmail() %>"><%=u.getEmail() %></option>
+		<%}%>
 	</select>
-
+	<a href="userLogged.jsp">Torna alla Home</a>
 </body>
 </html>

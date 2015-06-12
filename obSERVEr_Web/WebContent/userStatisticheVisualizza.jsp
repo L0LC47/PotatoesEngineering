@@ -6,6 +6,8 @@
 	int privileges = Integer.MAX_VALUE;
 	int pagePrivileges = 2;
 	String currentVeicolo = "";
+	String dInizio;
+	String dFine;
 	if (session.getAttribute("currentSessionUser") == null)
 		response.sendRedirect("Login.jsp");
 	else {
@@ -28,33 +30,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="refresh" content="text/html; charset=ISO-8859-1;1">
-<title>Visualizza date</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Visualizza statistiche</title>
 </head>
 <body>
-	<h3>Date per le statistiche del veicolo selezionato</h3>
+	<h3>Statistiche del veicolo selezionato</h3>
 	<p>Targa:</p><%=currentVeicolo%>
-
-	<p>Inserire le date per cui si desidera calcolare le statistiche</p>
-	<table>
-		<tr>
-			<td><input type="date" name="dataInizio" value="2015-01-01"></td>
-			<td><input type="date" name="dataFine" value="2015-12-31"></td>
-		</tr>
-	</table>
-	
-<%-- 	<table>
-		<%
-			Statistica s = new StatisticaMax();
-		%>
-		<%
-			int statistica = Veicolo.getStatistica(Veicolo
-					.getStatisticheVeicolo(currentVeicolo, request
-							.getParameter("dataInizio").toString(), request
-							.getParameter("dataFine").toString()), s);
-		%>
-
-	</table> --%>
-	
+	<p>Dal:</p><%=session.getAttribute("dataInizio")%>
+	<p>al:</p><%=session.getAttribute("dataFine")%>
+	</br>
+	<p>Velocità minima:</p><%=session.getAttribute("velMin")%>
+	<p>Velocità massima:</p><%=session.getAttribute("velMax")%>
+	<p>Velocità media:</p><%=session.getAttribute("velMed")%>
+	<p>Velocità media in movimento:</p><%=session.getAttribute("velMedMov")%>
+	</br>
+	</br>
+	<a href="userStatistiche.jsp">Torna alla pagina di selezione date e
+		veicolo</a>
+	<a href="userLogged.jsp">Torna alla Home</a>
 </body>
 </html>

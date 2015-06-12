@@ -25,6 +25,6 @@
 	Benvenuto nell'area riservata aa gestori flotta e amministratori
 	<%=currentUser%>.
 	</br>
-
+	<a href="userLogged.jsp">Torna alla Home</a>
 </body>
 </html>

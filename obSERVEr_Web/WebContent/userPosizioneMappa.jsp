@@ -33,8 +33,8 @@ else {
 <title>Insert title here</title>
 </head>
 <body>
-<h3>Posizione attuale del veicolo selezionato</h3>
-<p>Visualizza posizione del veicolo selezionato</p>
+	<h3>Posizione attuale del veicolo selezionato</h3>
+	<p>Visualizza posizione del veicolo selezionato</p>
 
 	<form>
 		<table>
@@ -42,8 +42,8 @@ else {
 				<td>Posizione</td>
 			</tr>
 			<%List<String> posizione = Storico.getStorico(currentVeicolo, currentDate);%>
-				
-					<% for(String p : posizione){%>
+
+			<% for(String p : posizione){%>
 			<tr>
 				<td><%=p%></td>
 			</tr>
@@ -51,7 +51,7 @@ else {
 				}
 			%>
 		</table>
-		
 	</form>
+	<a href="userLogged.jsp">Torna alla Home</a>
 </body>
 </html>

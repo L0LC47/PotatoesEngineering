@@ -22,7 +22,8 @@
 </head>
 <body>
 	<h3>Elenco dei veicoli</h3>
-	<p>Selezionare un veicolo per visualizzare la sua posizione corrente</p>
+	<p>Selezionare un veicolo per visualizzare la sua posizione
+		corrente</p>
 
 	<form action="userPosizioneMappa.jsp" method="POST">
 		<table>
@@ -56,7 +57,7 @@
 				}
 			%>
 		</table>
-
 	</form>
+	<a href="userLogged.jsp">Torna alla Home</a>
 </body>
 </html>

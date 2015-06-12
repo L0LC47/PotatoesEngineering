@@ -57,7 +57,7 @@
 				}
 			%>
 		</table>
-
 	</form>
+	<a href="userLogged.jsp">Torna alla Home</a>
 </body>
 </html>

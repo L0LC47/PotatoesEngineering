@@ -32,6 +32,6 @@
 		<li><a href="modificaUtente.jsp">Modifica Utente</a></li>
 		<li><a href="eliminaUtente.jsp">Elimina Utente</a></li>
 	</ul>
-
+	<a href="userLogged.jsp">Torna alla Home</a>
 </body>
 </html>

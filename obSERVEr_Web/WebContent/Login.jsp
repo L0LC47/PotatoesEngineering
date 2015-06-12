@@ -26,10 +26,10 @@
 		<br />Email:
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
 			type="email" name="user" required
-			placeholder="Inserisci un indirizzo email"> <br>
-		<br />Password: &nbsp;&nbsp;&nbsp;&nbsp; <input type="password"
-			name="pw" required placeholder="Inserisci la tua password"> <br>
-		<br /> <input type="submit" value="Invia">
+			placeholder="Inserisci un indirizzo email"> <br> <br />Password:
+		&nbsp;&nbsp;&nbsp;&nbsp; <input type="password" name="pw" required
+			placeholder="Inserisci la tua password"> <br> <br /> <input
+			type="submit" value="Invia">
 	</form>
 </body>
 </html>

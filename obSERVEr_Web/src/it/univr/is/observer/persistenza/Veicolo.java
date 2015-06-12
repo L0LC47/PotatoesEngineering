@@ -111,13 +111,13 @@ public class Veicolo {
 	public static List<Integer> getStatisticheVeicolo(String targa,
 			String inizio, String fine) {
 
-		Date dataInizio = null;
-		Date dataFine = null;
+		java.sql.Date dataInizio = null;
+		java.sql.Date dataFine = null;
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			dataInizio = formatter.parse(inizio);
-			dataFine = formatter.parse(fine);
+			dataInizio = new java.sql.Date(formatter.parse(inizio).getTime());
+			dataFine = new java.sql.Date(formatter.parse(fine).getTime());
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
