@@ -25,7 +25,7 @@
 <body>
 	<h3>Elenco degli allarmi</h3>
 	<p>Selezionare un veicolo dall'elenco per visualizzarne gli allarmi</p>
-	<form action="userAllarmiVisualizza.jsp" method="POST">
+	<form action="AllarmeServlet" method="POST">
 		<table>
 			<tr>
 				<td>Targa</td>
@@ -48,9 +48,6 @@
 				<td><%=veicolo.getModello()%></td>
 
 			</tr>
-			<%
-				session.setAttribute("veicoloSelezionato", veicolo.getTarga());
-			%>
 			<%
 				}
 			%>

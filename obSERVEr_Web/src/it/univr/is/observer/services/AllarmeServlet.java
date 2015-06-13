@@ -28,41 +28,15 @@ import java.util.List;
 /**
  * Servlet implementation class LoginServlet
  */
-public class StatisticheServlet extends HttpServlet {
-
-	private static int LOW_PRIVILEGE = 2;
-	private static int HIGH_PRIVILEGE = 0;
+public class AllarmeServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, java.io.IOException {
 		response.setContentType("text/html");
-		String inizio, fine, targa;
-		int min = 0, med = 0, medMov = 0, max = 0;
-
-		inizio = request.getParameter("dataInizio");
-		fine = request.getParameter("dataFine");
-		request.getSession().setAttribute("dataInizio", inizio);
-		request.getSession().setAttribute("dataFine", fine);
+		String targa;
 		targa = request.getParameter("targa");
-		System.out.println(targa);
 		request.getSession().setAttribute("veicoloSelezionato", targa);
-		List<Integer> velocita = Veicolo.getStatisticheVeicolo(targa, inizio,
-				fine);
-		if (velocita.size() > 0) {
-			min = Veicolo.getStatistica(velocita, new StatisticaMin());
-			max = Veicolo.getStatistica(velocita, new StatisticaMax());
-			med = Veicolo.getStatistica(velocita, new StatisticaMedia());
-			medMov = Veicolo.getStatistica(velocita,
-					new StatisticaMediaMovimento());
-		}
-		try {
-			request.getSession().setAttribute("velMin", min);
-			request.getSession().setAttribute("velMax", max);
-			request.getSession().setAttribute("velMed", med);
-			request.getSession().setAttribute("velMedMov", medMov);
-			response.sendRedirect("userStatisticheVisualizza.jsp");
-		} catch (Throwable theException) {
-			System.out.println(theException);
-		}
+		
+		response.sendRedirect("userAllarmiVisualizza.jsp");
 	}
 }

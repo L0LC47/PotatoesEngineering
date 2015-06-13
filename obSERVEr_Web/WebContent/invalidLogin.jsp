@@ -9,6 +9,6 @@
 <body>
 	Username e/o password non corretti o non esistenti.
 	</br>
-	<a href="userLogged.jsp">Torna alla Home</a>
+	<a href="Login.jsp">Torna alla Home</a>
 </body>
 </html>

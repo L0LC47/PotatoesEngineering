@@ -51,15 +51,11 @@
 
 			</tr>
 			<%
-				session.setAttribute("veicoloSelezionato", veicolo.getTarga());
-			%>
-			<%
 				}
 			%>
 			<td><input type="date" name="dataInizio" required></td>
 			<td><input type="date" name="dataFine" required></td>
 		</table>
-		<input type="submit" value="Calcola">
 	</form>
 	<a href="userLogged.jsp">Torna alla Home</a>
 </body>

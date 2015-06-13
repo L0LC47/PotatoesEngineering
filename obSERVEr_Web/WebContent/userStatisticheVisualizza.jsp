@@ -18,7 +18,9 @@
 		if (privileges > pagePrivileges)
 			response.sendRedirect("accessoNegato.jsp");
 		else {
-			if (session.getAttribute("veicoloSelezionato") == null)
+			if (session.getAttribute("veicoloSelezionato") == null
+					|| session.getAttribute("dataInizio") == null
+					|| session.getAttribute("dataFine") == null)
 				response.sendRedirect("userStatistiche.jsp");
 			else
 				currentVeicolo = session.getAttribute(
@@ -35,14 +37,14 @@
 </head>
 <body>
 	<h3>Statistiche del veicolo selezionato</h3>
-	<p>Targa:</p><%=currentVeicolo%>
-	<p>Dal:</p><%=session.getAttribute("dataInizio")%>
-	<p>al:</p><%=session.getAttribute("dataFine")%>
+	<p>Targa: <%=currentVeicolo%></p>
+	<p>Dal: <%=session.getAttribute("dataInizio")%></p>
+	<p>al: <%=session.getAttribute("dataFine")%></p>
 	</br>
-	<p>Velocità minima:</p><%=session.getAttribute("velMin")%>
-	<p>Velocità massima:</p><%=session.getAttribute("velMax")%>
-	<p>Velocità media:</p><%=session.getAttribute("velMed")%>
-	<p>Velocità media in movimento:</p><%=session.getAttribute("velMedMov")%>
+	<p>Velocità minima: <%=session.getAttribute("velMin")%></p>
+	<p>Velocità massima: <%=session.getAttribute("velMax")%></p>
+	<p>Velocità media: <%=session.getAttribute("velMed")%></p>
+	<p>Velocità media in movimento: <%=session.getAttribute("velMedMov")%></p>
 	</br>
 	</br>
 	<a href="userStatistiche.jsp">Torna alla pagina di selezione date e

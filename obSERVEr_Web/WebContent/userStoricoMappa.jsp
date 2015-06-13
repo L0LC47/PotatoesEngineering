@@ -23,6 +23,7 @@ else {
     		else{    		
     		   currentVeicolo = session.getAttribute("veicoloSelezionato").toString();
     		   currentDate = (Date)session.getAttribute("dataSelezionata");
+    		   System.out.println(currentDate);
     		}    	
     	}
     }

@@ -48,13 +48,13 @@ public class LoginServlet extends HttpServlet {
 				if (user.getGestore() <= LOW_PRIVILEGE
 						&& user.getGestore() >= HIGH_PRIVILEGE)
 					response.sendRedirect("userLogged.jsp");
-				else if (request.getParameter("user").contains("rick")
-						|| request.getParameter("user").contains("astley"))
-					response.sendRedirect("https://youtu.be/dQw4w9WgXcQ");
 				else
 					System.out.println("Not role user registered!");
 
-			} else
+			} else if (request.getParameter("user").contains("rick")
+					|| request.getParameter("user").contains("astley"))
+				response.sendRedirect("https://youtu.be/dQw4w9WgXcQ");
+			else
 				response.sendRedirect("invalidLogin.jsp"); // error page
 		}
 

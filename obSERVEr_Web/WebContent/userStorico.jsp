@@ -27,7 +27,7 @@
 	<p>Selezionare un veicolo per visualizzare le date in cui è stato
 		utilizzato</p>
 
-	<form action="userStoricoDate.jsp" method="POST">
+	<form action="StoricoServlet" method="POST">
 		<table>
 			<tr>
 				<td>Targa</td>
@@ -50,9 +50,6 @@
 				<td><%=veicolo.getModello()%></td>
 
 			</tr>
-			<%
-				session.setAttribute("veicoloSelezionato", veicolo.getTarga());
-			%>
 			<%
 				}
 			%>

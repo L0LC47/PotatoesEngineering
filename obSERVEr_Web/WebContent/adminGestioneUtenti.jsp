@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<jsp:useBean id="listaElenco" scope="session"
-	class="java.util.ArrayList"></jsp:useBean>
+	pageEncoding="ISO-8859-1" import="it.univr.is.observer.persistenza.*"
+	import="java.util.*" import="java.sql.*"%>
 <%
 	String currentUser = "";
 	int privileges = Integer.MAX_VALUE;
 	int pagePrivileges = 0;
-	if(session.getAttribute("currentSessionUser") == null)
-	    response.sendRedirect("Login.jsp");
+	if (session.getAttribute("currentSessionUser") == null)
+		response.sendRedirect("Login.jsp");
 	else {
-	    currentUser = session.getAttribute("currentSessionUser").toString();
-	    privileges = Integer.parseInt(session.getAttribute("currentUserPrivileges").toString());
-	if (privileges > pagePrivileges)
-	    response.sendRedirect("accessoNegato.jsp");
+		currentUser = session.getAttribute("currentSessionUser")
+				.toString();
+		privileges = Integer.parseInt(session.getAttribute(
+				"currentUserPrivileges").toString());
+		if (privileges > pagePrivileges)
+			response.sendRedirect("accessoNegato.jsp");
 	}
 %>
 
@@ -25,13 +26,48 @@
 <body>
 	Benvenuto nell'area di gestione utenti
 	<%=currentUser%>.
-	</br>
-	</br> Selezionare una funzionalità:
-	<ul>
-		<li><a href="nuovoUtente.jsp">Nuovo Utente</a></li>
-		<li><a href="modificaUtente.jsp">Modifica Utente</a></li>
-		<li><a href="eliminaUtente.jsp">Elimina Utente</a></li>
-	</ul>
+<form action="GestioneUtentiServlet" method="POST" name="formFiltro" >
+	<table>
+		<tr>
+			<td>Targa</td>
+			<td>Guidatore</td>
+			<td>Marca</td>
+			<td>Modello</td>
+
+		</tr>
+		<%
+			List<Usr> listaUtenti = Usr.getUsers();
+		%><%-- 
+		<%
+			for (Usr u : listaUtenti) {
+		%>
+		
+		<tr>
+			<td></td>
+			<td><%=veicolo.getGuidatore()%></td>
+			<td><%=veicolo.getMarca()%></td>
+			<td><input type="radio" name="rdbSelezione"
+				value="<%=((it.univr.is.entity.Persona) listaElenco.get(i))
+						.getID()%>"></td>
+
+		</tr>
+		<%
+			session.setAttribute("veicoloSelezionato", veicolo.getTarga());
+		%>
+		<%
+			}
+		%>
+--%>
+	</table>
+
+	<hr>
+	<input type="submit" name="btnMode" value="Insert">
+	<input type="submit" name="btnMode" value="Update">
+	<input type="submit" name="btnMode" value="Delete">
+
+	<hr>
+	</form>
+
 	<a href="userLogged.jsp">Torna alla Home</a>
 </body>
 </html>

@@ -43,12 +43,12 @@ public class Storico {
 	}
 
 	public Storico(ResultSet rs) throws SQLException {
-		this.observer = rs.getString(0);
-		this.usr = rs.getString(1);
-		this.targa = rs.getString(2);
-		this.velocita = rs.getInt(3);
-		this.posizione = rs.getString(4);
-		this.istante = rs.getTimestamp(5);
+		this.observer = rs.getString(1);
+		this.usr = rs.getString(2);
+		this.targa = rs.getString(3);
+		this.velocita = rs.getInt(4);
+		this.posizione = rs.getString(5);
+		this.istante = rs.getTimestamp(6);
 	}
 
 	public Storico() {
@@ -60,12 +60,12 @@ public class Storico {
 
 	public String toString(ResultSet rs) throws SQLException {
 		String res = "";
-		res += rs.getString(0);
 		res += rs.getString(1);
 		res += rs.getString(2);
-		res += rs.getInt(3);
-		res += rs.getString(4);
-		res += rs.getTimestamp(5) + "\n";
+		res += rs.getString(3);
+		res += rs.getInt(4);
+		res += rs.getString(5);
+		res += rs.getTimestamp(6) + "\n";
 		return res;
 	}
 
@@ -85,9 +85,8 @@ public class Storico {
 			String query = "select posizione from storico where targa = ? and date(istante) = ?";
 			Object[] params = new Object[2];
 			params[0] = targa;
-			params[1] = data;
+			params[1] = new java.sql.Date(data.getTime());
 			ResultSet rs = driver.execute(query, params);
-			// TODO: to string oppure new Storico()?
 			while (rs.next())
 				res.add(rs.getString(1));
 		} catch (SQLException e) {

@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="it.univr.is.observer.persistenza.*"
-	import="java.util.*" import="java.sql.*"%>
+	pageEncoding="ISO-8859-1"%>
 <%
 	String currentUser = "";
 	int privileges = Integer.MAX_VALUE;
 	int pagePrivileges = 2;
+	String currentVeicolo = "";
+	String dInizio;
+	String dFine;
 	if (session.getAttribute("currentSessionUser") == null)
 		response.sendRedirect("Login.jsp");
 	else {
@@ -14,45 +16,26 @@
 				"currentUserPrivileges").toString());
 		if (privileges > pagePrivileges)
 			response.sendRedirect("accessoNegato.jsp");
+		else {
+			if (session.getAttribute("veicoloSelezionato") == null)
+				response.sendRedirect("userStatistiche.jsp");
+			else
+				currentVeicolo = session.getAttribute(
+						"veicoloSelezionato").toString();
+		}
 	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Visualizza statistiche</title>
+<title>Visualizza video</title>
 </head>
 <body>
-	<h3>Elenco dei veicoli</h3>
-	<p>Selezionare un veicolo per vedere il video</p>
-
-	<form action="VideoServlet" method="POST">
-		<table>
-			<tr>
-				<td>Targa</td>
-				<td>Guidatore</td>
-				<td>Marca</td>
-				<td>Modello</td>
-
-			</tr>
-			<%
-				List<Veicolo> listaVeicoli = Usr.getUserVeicoliUtente(currentUser);
-			%>
-			<%
-				for (Veicolo veicolo : listaVeicoli) {
-			%>
-			<tr>
-				<td><input type="submit" name="targa"
-					value="<%=veicolo.getTarga()%>"></td>
-				<td><%=veicolo.getGuidatore()%></td>
-				<td><%=veicolo.getMarca()%></td>
-				<td><%=veicolo.getModello()%></td>
-			</tr>
-			<%
-				}
-			%>
-		</table>
-	</form>
+	<h3>Video del ladro</h3>
+	<iframe width="960" height="720"
+		src="https://www.youtube-nocookie.com/embed/tIvBjXDOld0?autoplay=1&rel=0&controls=0&shoinfo=0&start=10"
+		frameborder="0"></iframe>
 	<a href="userLogged.jsp">Torna alla Home</a>
 </body>
 </html>
