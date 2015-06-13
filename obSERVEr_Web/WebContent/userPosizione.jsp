@@ -25,7 +25,7 @@
 	<p>Selezionare un veicolo per visualizzare la sua posizione
 		corrente</p>
 
-	<form action="userPosizioneMappa.jsp" method="POST">
+	<form action="PosizioneServlet" method="POST">
 		<table>
 			<tr>
 				<td>Targa</td>
@@ -48,11 +48,6 @@
 				<td><%=veicolo.getModello()%></td>
 
 			</tr>
-			<%
-				session.setAttribute("veicoloSelezionato", veicolo.getTarga());
-				java.sql.Date dataOdierna = new java.sql.Date(new java.util.Date().getTime());
-				session.setAttribute("dataOdierna", dataOdierna);
-			%>
 			<%
 				}
 			%>

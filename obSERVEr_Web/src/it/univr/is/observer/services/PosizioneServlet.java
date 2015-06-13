@@ -23,31 +23,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.io.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Servlet implementation class LoginServlet
  */
-public class StoricoDataServlet extends HttpServlet {
+public class PosizioneServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, java.io.IOException {
 		response.setContentType("text/html");
 		
-		String data;
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		try {
-			data = request.getParameter("data");
-			date = format.parse(data);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		request.getSession().setAttribute("dataSelezionata", date);
-		response.sendRedirect("userStoricoMappa.jsp");
+		String targa;
+		targa = request.getParameter("targa");
+		request.getSession().setAttribute("veicoloSelezionato", targa);
+
+		response.sendRedirect("userPosizioneMappa.jsp");
+		
 	}
 }

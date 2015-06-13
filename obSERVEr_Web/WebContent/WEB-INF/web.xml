@@ -7,6 +7,16 @@
 
 
 	<servlet>
+		<servlet-name>PosizioneServlet</servlet-name>
+		<servlet-class>it.univr.is.observer.services.PosizioneServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PosizioneServlet</servlet-name>
+		<url-pattern>/PosizioneServlet</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
 		<servlet-name>StoricoDataServlet</servlet-name>
 		<servlet-class>it.univr.is.observer.services.StoricoDataServlet</servlet-class>
 	</servlet>

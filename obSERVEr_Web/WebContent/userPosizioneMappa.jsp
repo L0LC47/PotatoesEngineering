@@ -6,7 +6,7 @@ String currentUser = "";
 int privileges = Integer.MAX_VALUE;
 int pagePrivileges = 2;
 String currentVeicolo = "";
-Date currentDate = null;
+java.sql.Date currentDate = null;
 if(session.getAttribute("currentSessionUser") == null)
 response.sendRedirect("Login.jsp");
 else {
@@ -19,7 +19,7 @@ else {
 		response.sendRedirect("userPosizione.jsp");
 	else{
 		   currentVeicolo = session.getAttribute("veicoloSelezionato").toString();
-		   currentDate = (Date)session.getAttribute("dataOdierna");
+		   currentDate = new java.sql.Date(new java.util.Date().getTime());
 		}    	
 	}
 }
