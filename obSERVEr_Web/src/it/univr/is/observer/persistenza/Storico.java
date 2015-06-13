@@ -78,10 +78,10 @@ public class Storico {
 	 * @return
 	 */
 	public static List<String> getStorico(String targa, Date data) {
+		System.out.println(data);
 		List<String> res = new ArrayList<String>();
 		try {
 			MioDriver driver = MioDriver.getInstance();
-			// TODO: test date(timestamp)
 			String query = "select posizione from storico where targa = ? and date(istante) = ?";
 			Object[] params = new Object[2];
 			params[0] = targa;
@@ -130,10 +130,8 @@ public class Storico {
 			Object[] params = new Object[1];
 			params[0] = targa;
 			ResultSet rs = driver.execute(query, params);
-			while (rs.next()) {
+			while (rs.next()) 
 				res.add(rs.getDate(1));
-				System.out.println(rs.getDate(1));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
