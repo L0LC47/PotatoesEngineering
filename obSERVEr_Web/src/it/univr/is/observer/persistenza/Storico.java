@@ -129,8 +129,26 @@ public class Storico {
 			Object[] params = new Object[1];
 			params[0] = targa;
 			ResultSet rs = driver.execute(query, params);
-			while (rs.next()) 
+			while (rs.next())
 				res.add(rs.getDate(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	public static String getLastPos(String targa) {
+		String res = "";
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "select s.posizione from storico s where s.targa = ? AND "
+					+ "s.istante >= ALL(select s2.istante from storico s2 where "
+					+ "s2.targa = s.targa)";
+			Object[] params = new Object[1];
+			params[0] = targa;
+			ResultSet rs = driver.execute(query, params);
+			if (rs.next())
+				res = (rs.getString(1));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
