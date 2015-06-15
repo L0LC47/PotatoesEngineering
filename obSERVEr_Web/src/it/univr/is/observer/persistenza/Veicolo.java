@@ -48,7 +48,8 @@ public class Veicolo {
 		this.marca = rs.getString("marca");
 		this.modello = rs.getString("modello");
 		this.gestore = rs.getString("gestore");
-		this.guidatore = rs.getString("email");
+		// TODO test Serve da qualche parte?
+		// this.guidatore = rs.getString("email");
 	}
 
 	public Veicolo() {
@@ -64,7 +65,7 @@ public class Veicolo {
 	 * @param targa
 	 * @return
 	 */
-	public Veicolo getVeicoloData(String targa) {
+	public static Veicolo getVeicoloData(String targa) {
 		Veicolo res = null;
 		try {
 			MioDriver driver = MioDriver.getInstance();
@@ -89,7 +90,7 @@ public class Veicolo {
 		List<Veicolo> res = new ArrayList<>();
 		try {
 			MioDriver driver = MioDriver.getInstance();
-			String query = "select * from veicolo";
+			String query = "select * from veicolo v";
 			ResultSet rs = driver.execute(query, null);
 			while (rs.next())
 				res.add(new Veicolo(rs));
@@ -152,6 +153,110 @@ public class Veicolo {
 		return s.calcola(velocita);
 	}
 
+	/**
+	 * Elimina il veicolo targa 
+	 * @param targa
+	 * @return true se l'eliminazione è andata a buon fine
+	 */
+	public static boolean eliminaVeicolo(String targa) {
+		boolean res = false;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "DELETE FROM veicolo WHERE targa = ?";
+			Object[] params = new Object[1];
+			params[0] = targa;
+			// Se modifica 1 riga allora è andato a buon fine
+			if (driver.update(query, params) == 1)
+				res = true;
+		} catch (SQLException e) {
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
+
+	/**
+	 * Modifica il veicolo targa
+	 * @param targa
+	 * @param marca
+	 * @param modello
+	 * @param gestore
+	 * @return true se la modifica è andata a buon fine
+	 */
+	public static boolean modificaVeicolo(String targa, String marca,
+			String modello) {
+		boolean res = false;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "UPDATE veicolo SET marca = ?, modello = ? "
+					+ "WHERE targa = ?";
+			Object[] params = new Object[3];
+			params[2] = targa;
+			params[0] = marca;
+			params[1] = modello;
+			// Se modifica 1 riga allora è andato a buon fine
+			if (driver.update(query, params) == 1)
+				res = true;
+		} catch (SQLException e) {
+			res = false;
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
+	
+	/**
+	 * Inserisce un nuovo veicolo
+	 * @param targa
+	 * @param marca
+	 * @param modello
+	 * @param gestore
+	 * @return true se l'inserimento è andato a buon fine
+	 */
+	public static boolean inserisciVeicolo(String targa, String marca,
+			String modello) {
+		boolean res = false;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "INSERT INTO veicolo ( targa, marca, modello) "
+					+ "VALUES ( ?, ?, ?)";
+			Object[] params = new Object[3];
+			params[0] = targa;
+			params[1] = marca;
+			params[2] = modello;
+			// Se modifica 1 riga allora è andato a buon fine
+			if (driver.update(query, params) == 1)
+				res = true;
+		} catch (SQLException e) {
+			res = false;
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
+
+	/**
+	 * Controllo se il veicolo esiste già
+	 * @param targa
+	 * @return true se il veicolo esiste già
+	 */
+	public static boolean checkInserimento(String targa) {
+		boolean res = false;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "select * from veicolo where targa = ?";
+			Object[] params = new Object[1];
+			params[0] = targa;
+			ResultSet rs = driver.execute(query, params);
+			if (rs.next())
+				res = true;
+		} catch (SQLException e) {
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
+
 	// ==== Getter & Setter
 	// ========================================================================
 
@@ -194,5 +299,4 @@ public class Veicolo {
 	public void setGuidatore(String guidatore) {
 		this.guidatore = guidatore;
 	}
-
 }

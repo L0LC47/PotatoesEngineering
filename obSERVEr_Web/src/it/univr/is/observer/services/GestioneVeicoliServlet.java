@@ -1,13 +1,14 @@
 package it.univr.is.observer.services;
 
 import it.univr.is.observer.persistenza.Usr;
+import it.univr.is.observer.persistenza.Veicolo;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class GestioneUtentiServlet extends HttpServlet {
+public class GestioneVeicoliServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, java.io.IOException {
@@ -19,17 +20,17 @@ public class GestioneUtentiServlet extends HttpServlet {
 		request.getSession().setAttribute("modalita", parametroSceltaMode);
 
 		if (parametroSceltaMode.equalsIgnoreCase("Inserisci"))
-			response.sendRedirect("adminModificaUtente.jsp");
+			response.sendRedirect("adminModificaVeicolo.jsp");
 
 		if (parametroSceltaMode.equalsIgnoreCase("Modifica")) {
-			request.getSession().setAttribute("utenteSelezionato",
+			request.getSession().setAttribute("veicoloSelezionato",
 					parametroIdRecord);
-			response.sendRedirect("adminModificaUtente.jsp");
+			response.sendRedirect("adminModificaVeicolo.jsp");
 		}
 		if (parametroSceltaMode.equalsIgnoreCase("Elimina")) {
 			// Sei sicuro? --> Eliminazione effettuata con successo
 			// Elimina
-			if (Usr.eliminaUtente(parametroIdRecord)) {
+			if (Veicolo.eliminaVeicolo(parametroIdRecord)) {
 				if (parametroIdRecord.equals(request.getSession()
 						.getAttribute("currentSessionUser").toString()))
 					request.getSession().invalidate();

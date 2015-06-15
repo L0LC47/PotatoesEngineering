@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="it.univr.is.observer.persistenza.*"
+	import="java.util.*" import="java.sql.*"%>
 <jsp:useBean id="listaElenco" scope="session"
 	class="java.util.ArrayList"></jsp:useBean>
 <%
 	String currentUser = "";
 	int privileges = Integer.MAX_VALUE;
 	int pagePrivileges = 0;
-	if(session.getAttribute("currentSessionUser") == null)
-	    response.sendRedirect("Login.jsp");
+	if (session.getAttribute("currentSessionUser") == null)
+		response.sendRedirect("Login.jsp");
 	else {
-	    currentUser = session.getAttribute("currentSessionUser").toString();
-	    privileges = Integer.parseInt(session.getAttribute("currentUserPrivileges").toString());
-	if (privileges > pagePrivileges)
-	    response.sendRedirect("accessoNegato.jsp");
+		currentUser = session.getAttribute("currentSessionUser")
+				.toString();
+		privileges = Integer.parseInt(session.getAttribute(
+				"currentUserPrivileges").toString());
+		if (privileges > pagePrivileges)
+			response.sendRedirect("accessoNegato.jsp");
 	}
 %>
 
@@ -25,13 +28,49 @@
 <body>
 	Benvenuto nell'area di gestione veicoli
 	<%=currentUser%>.
+	<form action="GestioneVeicoliServlet" method="POST" name="formFiltro">
+		<table>
+			<tr>
+				<td>Targa</td>
+				<td>Marca</td>
+				<td>Modello</td>
+				<td>Gestore</td>
+				<td></td>
+
+			</tr>
+			<%
+				List<Veicolo> listaVeicoli = Veicolo.getVeicoli();
+			%>
+			<%
+				for (Veicolo v : listaVeicoli) {
+			%>
+
+			<tr>
+				<td><%=v.getTarga()%></td>
+				<td><%=v.getMarca()%></td>
+				<td><%=v.getModello()%></td>
+				<td><%=v.getGestore()%></td>
+				<td><input type="radio" name="rdbSelezione"
+					value="<%=v.getTarga()%>"></td>
+			</tr>
+			<%
+				}
+			%>
+		</table>
+
+		<hr>
+		<input type="submit" name="btnMode" value="Inserisci"> <input
+			type="submit" name="btnMode" value="Modifica"> <input
+			type="submit" name="btnMode" value="Elimina"
+			onclick="return confirm('Sei sicuro di voler eliminare il veicolo selezionato?')">
+		<hr>
+	</form>
 	</br>
-	</br> Selezionare una funzionalità:
-	<ul>
-		<li><a href="nuovoVeicolo.jsp">Nuovo Veicolo</a></li>
-		<li><a href="modificaVeicolo.jsp">Modifica Veicolo</a></li>
-		<li><a href="eliminaVeicolo.jsp">Elimina Veicolo</a></li>
-	</ul>
+	</br>
+	</br>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<form action="LogoutServlet" method="POST">
+		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+	</form>
 </body>
 </html>

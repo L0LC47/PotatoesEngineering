@@ -53,6 +53,14 @@ else {
 			<% }%>
 		</table>
 	</form>
+	</br>
+	</br>
+	</br>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<form action="LogoutServlet" method="POST">
+		</br>
+		</br>
+		</br> <input type="submit" name="Logout" value="Logout">
+	</form>
 </body>
 </html>

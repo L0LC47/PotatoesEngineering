@@ -5,6 +5,45 @@
       http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
+	<servlet>
+		<servlet-name>ModificaVeicoliServlet</servlet-name>
+		<servlet-class>it.univr.is.observer.services.ModificaVeicoliServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ModificaVeicoliServlet</servlet-name>
+		<url-pattern>/ModificaVeicoliServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GestioneVeicoliServlet</servlet-name>
+		<servlet-class>it.univr.is.observer.services.GestioneVeicoliServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GestioneVeicoliServlet</servlet-name>
+		<url-pattern>/GestioneVeicoliServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ModificaUtentiServlet</servlet-name>
+		<servlet-class>it.univr.is.observer.services.ModificaUtentiServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ModificaUtentiServlet</servlet-name>
+		<url-pattern>/ModificaUtentiServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GestioneUtentiServlet</servlet-name>
+		<servlet-class>it.univr.is.observer.services.GestioneUtentiServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GestioneUtentiServlet</servlet-name>
+		<url-pattern>/GestioneUtentiServlet</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>PosizioneServlet</servlet-name>
@@ -15,8 +54,18 @@
 		<servlet-name>PosizioneServlet</servlet-name>
 		<url-pattern>/PosizioneServlet</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>it.univr.is.observer.services.LogoutServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>StoricoDataServlet</servlet-name>
 		<servlet-class>it.univr.is.observer.services.StoricoDataServlet</servlet-class>
 	</servlet>
@@ -25,7 +74,7 @@
 		<servlet-name>StoricoDataServlet</servlet-name>
 		<url-pattern>/StoricoDataServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>StoricoServlet</servlet-name>
 		<servlet-class>it.univr.is.observer.services.StoricoServlet</servlet-class>
@@ -35,7 +84,7 @@
 		<servlet-name>StoricoServlet</servlet-name>
 		<url-pattern>/StoricoServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>AllarmeServlet</servlet-name>
 		<servlet-class>it.univr.is.observer.services.AllarmeServlet</servlet-class>
@@ -45,7 +94,7 @@
 		<servlet-name>AllarmeServlet</servlet-name>
 		<url-pattern>/AllarmeServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
 		<servlet-class>it.univr.is.observer.services.LoginServlet</servlet-class>
@@ -55,16 +104,7 @@
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/LoginServlet</url-pattern>
 	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>GestioneUtentiServlet</servlet-name>
-		<servlet-class>it.univr.is.observer.services.GestioneUtentiServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>GestioneUtentiServlet</servlet-name>
-		<url-pattern>/GestioneUtentiServlet</url-pattern>
-	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>StatisticheServlet</servlet-name>
 		<servlet-class>it.univr.is.observer.services.StatisticheServlet</servlet-class>
@@ -84,8 +124,8 @@
 		<servlet-name>UserServlet</servlet-name>
 		<url-pattern>/UserServlet</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>VideoServlet</servlet-name>
 		<servlet-class>it.univr.is.observer.services.VideoServlet</servlet-class>
 	</servlet>

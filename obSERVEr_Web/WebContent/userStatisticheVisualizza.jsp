@@ -37,18 +37,40 @@
 </head>
 <body>
 	<h3>Statistiche del veicolo selezionato</h3>
-	<p>Targa: <%=currentVeicolo%></p>
-	<p>Dal: <%=session.getAttribute("dataInizio")%></p>
-	<p>al: <%=session.getAttribute("dataFine")%></p>
+	<p>
+		Targa:
+		<%=currentVeicolo%></p>
+	<p>
+		Dal:
+		<%=session.getAttribute("dataInizio")%></p>
+	<p>
+		al:
+		<%=session.getAttribute("dataFine")%></p>
 	</br>
-	<p>Velocità minima: <%=session.getAttribute("velMin")%></p>
-	<p>Velocità massima: <%=session.getAttribute("velMax")%></p>
-	<p>Velocità media: <%=session.getAttribute("velMed")%></p>
-	<p>Velocità media in movimento: <%=session.getAttribute("velMedMov")%></p>
+	<p>
+		Velocità minima:
+		<%=session.getAttribute("velMin")%></p>
+	<p>
+		Velocità massima:
+		<%=session.getAttribute("velMax")%></p>
+	<p>
+		Velocità media:
+		<%=session.getAttribute("velMed")%></p>
+	<p>
+		Velocità media in movimento:
+		<%=session.getAttribute("velMedMov")%></p>
 	</br>
 	</br>
 	<a href="userStatistiche.jsp">Torna alla pagina di selezione date e
 		veicolo</a>
+	</br>
+	</br>
+	</br>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<form action="LogoutServlet" method="POST">
+		</br>
+		</br>
+		</br> <input type="submit" name="Logout" value="Logout">
+	</form>
 </body>
 </html>

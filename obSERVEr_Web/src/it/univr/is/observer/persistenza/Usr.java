@@ -92,7 +92,7 @@ public class Usr {
 						+ "OR uv.fine is null)";
 
 				params = null;
-				
+
 				break;
 			// se livelloPrivilegi = 1 -> GestoreFlotta
 			case 1:
@@ -116,13 +116,13 @@ public class Usr {
 				// TODO: Gestione errore
 				System.err.println("Errore inserimento");
 			}
-				rs = driver.execute(query, params);
-				while (rs.next())
-					res.add(new Veicolo(rs));
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return res;
+			rs = driver.execute(query, params);
+			while (rs.next())
+				res.add(new Veicolo(rs));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	/**
@@ -147,19 +147,19 @@ public class Usr {
 		}
 		return res;
 	}
-	
-	
+
 	/**
-	 * Ritorno i dati di tutti gli "utenti"
+	 * Ritorno i dati di tutti gli utenti
 	 * 
 	 * @param email
 	 * @return
 	 */
+	// TODO parlarne: perchè tornava solo gli utenti (gestore = 2)?
 	public static List<Usr> getUsers() {
 		List<Usr> res = new ArrayList<>();
 		try {
 			MioDriver driver = MioDriver.getInstance();
-			String query = "select * from usr where gestore = 2";
+			String query = "select * from usr order by gestore";
 			ResultSet rs = driver.execute(query, null);
 			while (rs.next())
 				res.add(new Usr(rs));
@@ -169,8 +169,121 @@ public class Usr {
 		}
 		return res;
 	}
-	
-	
+
+	/**
+	 * Controllo se l'utente email esiste già
+	 * 
+	 * @param email
+	 * @return true se l'utente esiste già
+	 */
+	public static boolean checkInserimento(String email) {
+		boolean res = false;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "select * from usr where email = ?";
+			Object[] params = new Object[1];
+			params[0] = email;
+			ResultSet rs = driver.execute(query, params);
+			if (rs.next())
+				res = true;
+		} catch (SQLException e) {
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
+
+	/**
+	 * Inserisco un nuovo utente
+	 * 
+	 * @param email
+	 * @param nome
+	 * @param cognome
+	 * @param password
+	 * @param gestore
+	 * @return true se l'inserimento è andato a buon fine
+	 */
+	public static boolean inserisciUtente(String email, String nome,
+			String cognome, String password, String gestore) {
+		boolean res = false;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "INSERT INTO usr ( email, nome, cognome, password, "
+					+ "gestore ) VALUES ( ?, ?, ?, ?, ?)";
+			Object[] params = new Object[5];
+			params[0] = email;
+			params[1] = nome;
+			params[2] = cognome;
+			params[3] = password;
+			params[4] = Integer.parseInt(gestore);
+			// TODO test se non isnerisce lancia eccezione?
+			// Se modifica 1 riga allora è andato a buon fine
+			if (driver.update(query, params) == 1)
+				res = true;
+		} catch (SQLException e) {
+			res = false;
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
+
+	/**
+	 * Modifico l'utente email
+	 * 
+	 * @param email
+	 * @param nome
+	 * @param cognome
+	 * @param password
+	 * @param gestore
+	 * @return
+	 */
+	public static boolean modificaUtente(String email, String nome,
+			String cognome, String password, String gestore) {
+		boolean res = false;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "UPDATE usr SET nome = ?, cognome = ?, password = ?,"
+					+ " gestore = ? WHERE email = ?";
+			Object[] params = new Object[5];
+			params[4] = email;
+			params[0] = nome;
+			params[1] = cognome;
+			params[2] = password;
+			params[3] = Integer.parseInt(gestore);
+			// Se modifica 1 riga allora è andato a buon fine
+			if (driver.update(query, params) == 1)
+				res = true;
+		} catch (SQLException e) {
+			res = false;
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
+
+	/**
+	 * Elimino l'utente email
+	 * 
+	 * @param email
+	 * @return true se l'eliminazione è andata a buon fine
+	 */
+	public static boolean eliminaUtente(String email) {
+		boolean res = false;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "DELETE FROM usr WHERE email = ?";
+			Object[] params = new Object[1];
+			params[0] = email;
+			// Se modifica 1 riga allora è andato a buon fine
+			if (driver.update(query, params) == 1)
+				res = true;
+		} catch (SQLException e) {
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
 
 	// ==== Getter & Setter
 	// ========================================================================
@@ -214,5 +327,4 @@ public class Usr {
 	public void setGestore(int gestore) {
 		this.gestore = gestore;
 	}
-
 }

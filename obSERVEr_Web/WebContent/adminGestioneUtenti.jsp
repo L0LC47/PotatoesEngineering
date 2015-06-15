@@ -26,48 +26,49 @@
 <body>
 	Benvenuto nell'area di gestione utenti
 	<%=currentUser%>.
-<form action="GestioneUtentiServlet" method="POST" name="formFiltro" >
-	<table>
-		<tr>
-			<td>Targa</td>
-			<td>Guidatore</td>
-			<td>Marca</td>
-			<td>Modello</td>
+	<form action="GestioneUtentiServlet" method="POST" name="formFiltro">
+		<table>
+			<tr>
+				<td>Email</td>
+				<td>Nome</td>
+				<td>Cognome</td>
+				<td>Liv.Privilegi</td>
+				<td></td>
 
-		</tr>
-		<%
-			List<Usr> listaUtenti = Usr.getUsers();
-		%><%-- 
-		<%
-			for (Usr u : listaUtenti) {
-		%>
-		
-		<tr>
-			<td></td>
-			<td><%=veicolo.getGuidatore()%></td>
-			<td><%=veicolo.getMarca()%></td>
-			<td><input type="radio" name="rdbSelezione"
-				value="<%=((it.univr.is.entity.Persona) listaElenco.get(i))
-						.getID()%>"></td>
+			</tr>
+			<%
+				List<Usr> listaUtenti = Usr.getUsers();
+			%>
+			<%
+				for (Usr u : listaUtenti) {
+			%>
 
-		</tr>
-		<%
-			session.setAttribute("veicoloSelezionato", veicolo.getTarga());
-		%>
-		<%
-			}
-		%>
---%>
-	</table>
+			<tr>
+				<td><%=u.getEmail()%></td>
+				<td><%=u.getNome()%></td>
+				<td><%=u.getCognome()%></td>
+				<td><%=u.getGestore()%></td>
+				<td><input type="radio" name="rdbSelezione"
+					value="<%=u.getEmail()%>"></td>
 
-	<hr>
-	<input type="submit" name="btnMode" value="Insert">
-	<input type="submit" name="btnMode" value="Update">
-	<input type="submit" name="btnMode" value="Delete">
+			</tr>
+			<%
+				}
+			%>
+		</table>
 
-	<hr>
+		<hr>
+		<input type="submit" name="btnMode" value="Inserisci"> <input
+			type="submit" name="btnMode" value="Modifica"> <input
+			type="submit" name="btnMode" value="Elimina"	onclick="return confirm('Sei sicuro di voler eliminare l\'utente selezionato?')">
+		<hr>
 	</form>
-
+	</br>
+	</br>
+	</br>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<form action="LogoutServlet" method="POST">
+		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+	</form>
 </body>
 </html>

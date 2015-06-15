@@ -99,7 +99,6 @@ public class Storico {
 		List<Storico> res = new ArrayList<Storico>();
 		try {
 			MioDriver driver = MioDriver.getInstance();
-			// TODO: test date(timestamp)
 			String query = "SELECT * FROM storico s, allarme a WHERE targa = ? "
 					+ "AND s.observer = a.observer AND s.velocita > a.velocita";
 			Object[] params = new Object[1];
