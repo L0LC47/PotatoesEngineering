@@ -48,8 +48,10 @@ public class Veicolo {
 		this.marca = rs.getString("marca");
 		this.modello = rs.getString("modello");
 		this.gestore = rs.getString("gestore");
-		// TODO test Serve da qualche parte?
-		// this.guidatore = rs.getString("email");
+		// TODO test Serve da qualche parte? Sì, ma ne possiamo parlare; per adesso metto una pezza ;)
+		try{
+			this.guidatore = rs.getString("email");
+		}catch(SQLException e) {}
 	}
 
 	public Veicolo() {
