@@ -11,6 +11,7 @@ package it.univr.is.observer.services;
  * if the username and password inputted by the user are valid or not.
  * */
 
+import it.univr.is.observer.persistenza.Usr;
 import it.univr.is.observer.persistenza.Usr_veicolo;
 import it.univr.is.observer.persistenza.Veicolo;
 import it.univr.is.observer.logica.*;
@@ -33,19 +34,43 @@ public class AssociazioneServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, java.io.IOException {
-		response.setContentType("text/html");
-		if ("Associa".equals(request.getParameter("button"))) {
-			String targa = request.getParameter("veicolo");
+
+		// valutazione se si deve andare in uno dei modi DML
+		String parametroSceltaMode = request.getParameter("btnMode");
+		request.setAttribute("messaggio", "");
+
+		if (parametroSceltaMode.equalsIgnoreCase("Inserisci")) {
+			request.getRequestDispatcher("gestoreNuovaAssociaUtentiVeicoli.jsp")
+			.forward(request, response);
+		} else if (parametroSceltaMode.equalsIgnoreCase("Elimina")) {
+			// Sei sicuro? --> Eliminazione effettuata con successo
+			// Elimina
+			String parametroIdRecord = request.getParameter("rdbSelezione");
+			if (Usr_veicolo.termina(parametroIdRecord)) {
+				request.setAttribute("messaggio",
+						"Eliminazione effettuata con successo!");
+				request.getRequestDispatcher("gestoreAssociaUtentiVeicoli.jsp")
+						.forward(request, response);
+			} else {
+				// Inserimento non andato a buon fine
+				request.getSession().setAttribute("messaggio", "Errore!");
+			}
+		} else if (parametroSceltaMode.equalsIgnoreCase("Associa")) {
 			String email = request.getParameter("utente");
+			String targa = request.getParameter("veicolo");
+
 			if (Usr_veicolo.associa(email, targa)) {
-				response.sendRedirect("userPosizione.jsp");
-			} else
-				response.sendRedirect("userLogged.jsp");
-		} else if ("Visualizza dati".equals(request.getParameter("button"))) {
-			request.getRequestDispatcher("gestoreAssociaUtentiVeicoli.jsp").forward(request, response);
-			//response.sendRedirect("gestoreAssociaUtentiVeicoli.jsp");
-		} else{
-			request.getRequestDispatcher("gestoreAssociaUtentiVeicoli.jsp").forward(request, response);
+				request.setAttribute("messaggio",
+						"Associazione effettuata con successo!");
+				request.getRequestDispatcher("gestoreAssociaUtentiVeicoli.jsp")
+						.forward(request, response);
+			} else {
+				// Inserimento non andato a buon fine
+				request.getSession().setAttribute("messaggio", "Errore!");
+			}
+		} else {
+			request.getRequestDispatcher("gestoreNuovaAssociaUtentiVeicoli.jsp")
+			.forward(request, response);
 		}
 	}
 }

@@ -16,19 +16,6 @@
 	}
 %>
 
-
-<%!String veicolo = "";
-	String utente = "";%>
-
-<%
-	if (request.getParameter("veicolo") != null)
-		veicolo = request.getParameter("veicolo");
-
-	if (request.getParameter("utente") != null)
-		utente = request.getParameter("utente");
-%>
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,96 +23,61 @@
 <title>Associazione utenti veicoli</title>
 </head>
 <body>
-	Benvenuto nell'area riservata aa gestori flotta e amministratori
+	Benvenuto nell'area riservata a gestori flotta e amministratori
 	<%=currentUser%>.
 	</br>
 
 	<form action="AssociazioneServlet" method="POST">
-		<table>
-			</br>
-			<tr>
-				<td>Utente</td>
-				<td><select id="utente" name="utente"
-					onChange="this.form.submit()">
-						<%
-							for (Usr u : Usr.getUsers()) {
-						%>
-						<%
-							if (u.getGestore() == 2) {
-						%>
-						<option value="<%=u.getEmail()%>"
-							<%=utente.equals(u.getEmail()) ? " selected" : ""%>>
-							<%=u.getEmail()%>
-						</option>
-						<%
-							}
-						%>
-						<%
-							}
-						%>
-				</select></td>
-
-				<td>Veicolo</td>
-				<td><select id="veicolo" name="veicolo"
-					onChange="this.form.submit()">
-						<%
-							for (Veicolo v : Usr_veicolo.getVeicoli()) {
-						%>
-						<%
-							if (v.getGuidatore() == null) {
-						%>
-						<option value="<%=v.getTarga()%>"
-							<%=veicolo.equals(v.getTarga()) ? " selected" : ""%>>
-							<%=v.getTarga()%>
-						</option>
-						<%
-							}
-						%>
-						<%
-							}
-						%>
-				</select></td>
-			</tr>
+		<table order="1" cellpadding="1" cellspacing="5">
+			<thead>
+				<tr>
+					<th scope="col">Email</th>
+					<th scope="col">Nome</th>
+					<th scope="col">Cognome</th>
+					<th scope="col">Targa</th>
+					<th scope="col">Marca</th>
+					<th scope="col">Modello</th>
+					<th scope="col">Inizio</th>
+					<th scope="col">Elimina</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					for (Usr_veicolo uv : Usr_veicolo.getAssociazioniCorrenti()) {
+				%>
+				<%
+					Veicolo v = Veicolo.getVeicoloData(uv.getTarga());
+						Usr u = Usr.getUserData(uv.getEmail());
+				%>
+				<tr>
+					<td><%=uv.getEmail()%></td>
+					<td><%=u.getNome()%></td>
+					<td><%=u.getCognome()%></td>
+					<td><%=uv.getTarga()%></td>
+					<td><%=v.getMarca()%></td>
+					<td><%=v.getModello()%></td>
+					<td><%=uv.getInizio()%></td>
+					<td style="text-align: center;"><input name="rdbSelezione"
+						type="radio" value="<%=uv.getTarga()%>" /></td>
+				</tr>
+				<%
+					}
+				%>
+			</tbody>
 		</table>
-		<input type="submit" name="button" value="Visualizza dati"> <input
-			type="submit" name="button" value="Associa">
+	<hr>
+	<input type="submit" name="btnMode" value="Inserisci">
+	<input type="submit" name="btnMode" value="Elimina"
+		onclick="return confirm('Sei sicuro di voler eliminare l\'associazione selezionata?')">
+	<hr>
 
-
-
-		<%
-			if (!veicolo.isEmpty()) {
-		%>
-		<p>
-			marca:
-			<%=Veicolo.getVeicoloData(veicolo).getMarca()%>
-			</br> modello:
-			<%=Veicolo.getVeicoloData(veicolo).getModello()%>
-		</p>
-		<%
-			}
-		%>
-
-		<%
-			if (!utente.isEmpty()) {
-		%>
-		<p>
-			nome:
-			<%=Usr.getUserData(utente).getNome()%>
-			</br> cognome:
-			<%=Usr.getUserData(utente).getCognome()%>
-		</p>
-		<%
-			}
-		%>
-
-
+    <%= (request.getAttribute("messaggio") == null) ? "" : request.getAttribute("messaggio").toString() %>
 
 	</form>
 	<a href="userLogged.jsp">Torna alla Home</a>
 	<form action="LogoutServlet" method="POST">
 		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
 	</form>
-
 
 </body>
 </html>
