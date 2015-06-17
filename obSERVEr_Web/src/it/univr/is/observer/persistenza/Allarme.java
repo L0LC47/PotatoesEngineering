@@ -4,6 +4,8 @@ import it.univr.is.database.MioDriver;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  observer char(10) PRIMARY KEY,
@@ -30,6 +32,11 @@ public class Allarme {
 
 	}
 
+	public Allarme(ResultSet rs) throws SQLException {
+		this.observer = rs.getString("observer");
+		this.velocita = rs.getInt("velocita");
+	}
+
 	// ==== Methods
 	// ========================================================================
 
@@ -40,7 +47,7 @@ public class Allarme {
 	 * @param seriale
 	 * @return
 	 */
-	public int getAllarmeDB(String seriale) {
+	public static int getAllarmeDB(String seriale) {
 		int result = -1;
 		try {
 			MioDriver driver = MioDriver.getInstance();
@@ -64,18 +71,22 @@ public class Allarme {
 	 * @param velocita
 	 * @param seriale
 	 */
-	public void setAllarme(int velocita, String seriale) {
+	public static boolean setAllarme(int velocita, String seriale) {
 		try {
+
 			MioDriver driver = MioDriver.getInstance();
 			String query = "update allarme set velocita = ? where observer=?";
 			Object[] params = new Object[2];
 			params[0] = velocita;
 			params[1] = seriale;
-			if (driver.update(query, params) != 1)
+			if (driver.update(query, params) != 1) {
 				System.err.println("Errore inserimento");
+				return false;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return true;
 	}
 
 	/**
@@ -151,6 +162,22 @@ public class Allarme {
 			e.printStackTrace();
 		}
 		return rs;
+	}
+
+	public static List<Allarme> getAll() {
+		ResultSet rs = null;
+		List<Allarme> res = new ArrayList<>();
+		MioDriver driver = MioDriver.getInstance();
+		String query = "SELECT * FROM allarme";
+
+		try {
+			rs = driver.execute(query, null);
+			while (rs.next())
+				res.add(new Allarme(rs));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	// ==== Getter & Setter

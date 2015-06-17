@@ -73,7 +73,7 @@ public class Usr_veicolo {
 		}
 		return res;
 	}
-
+	
 	public static List<Usr_veicolo> getAssociazioniCorrenti() {
 		List<Usr_veicolo> res = new ArrayList<>();
 		try {
@@ -88,6 +88,7 @@ public class Usr_veicolo {
 		}
 		return res;
 	}
+	
 	public static boolean associa(String email, String targa) {
 		int res = -1;
 		try {

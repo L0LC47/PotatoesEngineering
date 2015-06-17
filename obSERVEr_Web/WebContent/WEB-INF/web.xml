@@ -145,6 +145,16 @@
 		<url-pattern>/AssociazioneServlet</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>ImpostaAllarmiServlet</servlet-name>
+		<servlet-class>it.univr.is.observer.services.ImpostaAllarmiServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ImpostaAllarmiServlet</servlet-name>
+		<url-pattern>/ImpostaAllarmiServlet</url-pattern>
+
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>Login.jsp</welcome-file>
 	</welcome-file-list>

@@ -1,6 +1,12 @@
 package it.univr.is.observer.persistenza;
 
+import it.univr.is.database.MioDriver;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /*
  serial char(10),
@@ -35,6 +41,28 @@ public class Veicolo_observer {
 
 	// ==== Methods
 	// ========================================================================
+	
+	public Veicolo_observer(ResultSet rs) throws SQLException {
+		this.serial = rs.getString("serial");
+		this.targa = rs.getString("targa");
+		this.inizio = rs.getDate("inizio");
+		this.fine = rs.getDate("fine");
+	}
+
+	public static List<Veicolo_observer> getAssociazioniCorrenti() {
+		List<Veicolo_observer> res = new ArrayList<>();
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "select * from veicolo_observer where fine is null order by serial";
+			ResultSet rs = driver.execute(query, null);
+			while (rs.next())
+				res.add(new Veicolo_observer(rs));
+		} catch (SQLException e) {
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
 
 	// ==== Getter & Setter
 	// ========================================================================
