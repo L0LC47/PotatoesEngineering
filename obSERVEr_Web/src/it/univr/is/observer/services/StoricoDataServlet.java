@@ -11,23 +11,15 @@ package it.univr.is.observer.services;
  * if the username and password inputted by the user are valid or not.
  * */
 
-import it.univr.is.observer.persistenza.Veicolo;
-import it.univr.is.observer.logica.*;
-import it.univr.is.database.MioDriver;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class LoginServlet

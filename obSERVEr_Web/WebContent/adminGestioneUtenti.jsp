@@ -60,7 +60,8 @@
 		<hr>
 		<input type="submit" name="btnMode" value="Inserisci"> <input
 			type="submit" name="btnMode" value="Modifica"> <input
-			type="submit" name="btnMode" value="Elimina"	onclick="return confirm('Sei sicuro di voler eliminare l\'utente selezionato?')">
+			type="submit" name="btnMode" value="Elimina"
+			onclick="return confirm('Sei sicuro di voler eliminare l\'utente selezionato?')">
 		<hr>
 	</form>
 	</br>

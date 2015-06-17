@@ -12,10 +12,8 @@ package it.univr.is.observer.services;
  * */
 
 import it.univr.is.observer.persistenza.Usr;
-import it.univr.is.database.MioDriver;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +35,6 @@ public class LoginServlet extends HttpServlet {
 
 			if (user != null
 					&& user.getPassword().equals(request.getParameter("pw"))) {
-				// TODO: MD5 password
 				HttpSession session = request.getSession(true);
 				session.setAttribute("currentSessionUser", user.getEmail());
 				session.setAttribute("currentUserPrivileges", user.getGestore());

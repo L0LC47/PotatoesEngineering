@@ -40,13 +40,13 @@
 <title>Posizione attuale del veicolo</title>
 <style>
 html, body, #map-canvas {
-    height: 400px;
-    margin: 0px;
-    padding: 0px
+	height: 400px;
+	margin: 0px;
+	padding: 0px
 }
 </style>
 <script
-    src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 <script>
     function initialize() {
         var myLatlng = new google.maps.LatLng(<%=pos%>);
@@ -68,11 +68,13 @@ html, body, #map-canvas {
 </script>
 </head>
 <body>
-    <h3>Posizione attuale del veicolo selezionato: <%=pos %></h3>
-    <div id="map-canvas"></div>
-    <a href="userLogged.jsp">Torna alla Home</a>
-    <form action="LogoutServlet" method="POST">
-        </br> </br> </br> <input type="submit" name="Logout" value="Logout">
-    </form>
+	<h3>
+		Posizione attuale del veicolo selezionato:
+		<%=pos %></h3>
+	<div id="map-canvas"></div>
+	<a href="userLogged.jsp">Torna alla Home</a>
+	<form action="LogoutServlet" method="POST">
+		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+	</form>
 </body>
 </html>

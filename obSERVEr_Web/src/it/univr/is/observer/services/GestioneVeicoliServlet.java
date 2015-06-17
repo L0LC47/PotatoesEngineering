@@ -1,6 +1,5 @@
 package it.univr.is.observer.services;
 
-import it.univr.is.observer.persistenza.Usr;
 import it.univr.is.observer.persistenza.Veicolo;
 
 import javax.servlet.ServletException;

@@ -25,49 +25,47 @@
 <title>Visualizza storico</title>
 </head>
 <body>
-    <h3>Elenco dei veicoli nello storico</h3>
-    <p>Selezionare un veicolo per visualizzare le date in cui è stato
-        utilizzato</p>
+	<h3>Elenco dei veicoli nello storico</h3>
+	<p>Selezionare un veicolo per visualizzare le date in cui è stato
+		utilizzato</p>
 
-    <form action="StoricoServlet" method="POST">
-        <table>
-            <tr>
-                <td>Targa</td>
-                <td>Guidatore</td>
-                <td>Marca</td>
-                <td>Modello</td>
+	<form action="StoricoServlet" method="POST">
+		<table>
+			<tr>
+				<td>Targa</td>
+				<td>Guidatore</td>
+				<td>Marca</td>
+				<td>Modello</td>
 
-            </tr>
-            <%--
+			</tr>
+			<%--
             creare altra query per restituire anche guidatore 
             --%>
-            <%
+			<%
                 List<Veicolo> listaVeicoli = Usr.getUserVeicoliUtente(currentUser);
             %>
-            <%
+			<%
                 for (Veicolo veicolo : listaVeicoli) {
             %>
-            <tr>
-                <td><input type="submit" name="targa"
-                    value="<%=veicolo.getTarga()%>"></td>
-                <td><%=veicolo.getGuidatore()%></td>
-                <td><%=veicolo.getMarca()%></td>
-                <td><%=veicolo.getModello()%></td>
+			<tr>
+				<td><input type="submit" name="targa"
+					value="<%=veicolo.getTarga()%>"></td>
+				<td><%=veicolo.getGuidatore()%></td>
+				<td><%=veicolo.getMarca()%></td>
+				<td><%=veicolo.getModello()%></td>
 
-            </tr>
-            <%
+			</tr>
+			<%
                 }
             %>
-        </table>
-    </form>
-    </br>
-    </br>
-    </br>
-    <a href="userLogged.jsp">Torna alla Home</a>
-    <form action="LogoutServlet" method="POST">
-        </br>
-        </br>
-        </br> <input type="submit" name="Logout" value="Logout">
-    </form>
+		</table>
+	</form>
+	</br>
+	</br>
+	</br>
+	<a href="userLogged.jsp">Torna alla Home</a>
+	<form action="LogoutServlet" method="POST">
+		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+	</form>
 </body>
 </html>

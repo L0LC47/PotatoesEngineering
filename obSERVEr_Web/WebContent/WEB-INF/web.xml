@@ -135,10 +135,10 @@
 		<url-pattern>/VideoServlet</url-pattern>
 	</servlet-mapping>
 
-    <servlet>
-        <servlet-name>AssociazioneServlet</servlet-name>
-        <servlet-class>it.univr.is.observer.services.AssociazioneServlet</servlet-class>
-    </servlet>
+	<servlet>
+		<servlet-name>AssociazioneServlet</servlet-name>
+		<servlet-class>it.univr.is.observer.services.AssociazioneServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>AssociazioneServlet</servlet-name>

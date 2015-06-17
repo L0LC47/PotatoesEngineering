@@ -19,7 +19,6 @@ public class Posizione {
 		this.longitudine = longitudine;
 	}
 
-	// TODO test
 	public Posizione(String position) {
 		String temp[] = position.split(",");
 		this.latitudine = (int) (Float.parseFloat(temp[0]) * precisione);
@@ -33,7 +32,6 @@ public class Posizione {
 	// ==== Methods
 	// ========================================================================
 
-	// TODO test
 	@Override
 	public String toString() {
 		return (this.latitudine / precisione) + "."

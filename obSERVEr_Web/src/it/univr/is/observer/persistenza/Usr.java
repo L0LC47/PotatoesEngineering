@@ -113,7 +113,7 @@ public class Usr {
 				params[0] = email;
 				break;
 			default:
-				// TODO: Gestione errore
+
 				System.err.println("Errore inserimento");
 			}
 			rs = driver.execute(query, params);
@@ -154,7 +154,6 @@ public class Usr {
 	 * @param email
 	 * @return
 	 */
-	// TODO parlarne: perchè tornava solo gli utenti (gestore = 2)?
 	public static List<Usr> getUsers() {
 		List<Usr> res = new ArrayList<>();
 		try {
@@ -216,7 +215,6 @@ public class Usr {
 			params[2] = cognome;
 			params[3] = password;
 			params[4] = Integer.parseInt(gestore);
-			// TODO test se non isnerisce lancia eccezione?
 			// Se modifica 1 riga allora è andato a buon fine
 			if (driver.update(query, params) == 1)
 				res = true;

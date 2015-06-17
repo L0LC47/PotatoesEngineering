@@ -1,7 +1,5 @@
 package it.univr.is.database;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,17 +12,16 @@ public class MioDriver {
 	private String sUserNameDB;
 	private String sPasswordDB;
 	private Connection connection;
-	private String sDriver;
-	private Properties myProperties = new Properties(); // Per massimizzare
-														// portabilità,
-														// mantenibilità, riuso
-														// ...
-	private static MioDriver instance;
+	/*
+	 * private String sDriver; private Properties myProperties = new
+	 * Properties(); // Per massimizzare // portabilità, // mantenibilità, riuso
+	 * // ...
+	 */private static MioDriver instance;
 
 	// Singleton
 	private MioDriver() {
 		// Caricamento driver
-		//TODO perchè non trova le properties?
+		// TODO Sviluppi futuri, usare file di property
 		/*
 		 * sDriver = myProperties.getProperty("dbmanager.driver"); try {
 		 * InputStream is = new FileInputStream("jdbc.properties");
@@ -44,7 +41,6 @@ public class MioDriver {
 		try {
 			Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		sUrlDB = "jdbc:postgresql://dbserver.scienze.univr.it/dblab73";

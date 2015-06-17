@@ -47,7 +47,7 @@
 			<tr>
 				<td>Utente</td>
 				<td><select id="utente" name="utente">
-				<!--  onChange="this.form.submit()" -->
+						<!--  onChange="this.form.submit()" -->
 						<%
 							for (Usr u : Usr.getUsers()) {
 						%>
@@ -68,7 +68,7 @@
 
 				<td>Veicolo</td>
 				<td><select id="veicolo" name="veicolo">
-				<!--  onChange="this.form.submit()" -->
+						<!--  onChange="this.form.submit()" -->
 						<%
 							for (Veicolo v : Usr_veicolo.getVeicoliConGuidatore()) {
 						%>

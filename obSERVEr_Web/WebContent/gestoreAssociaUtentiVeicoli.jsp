@@ -65,13 +65,13 @@
 				%>
 			</tbody>
 		</table>
-	<hr>
-	<input type="submit" name="btnMode" value="Inserisci">
-	<input type="submit" name="btnMode" value="Elimina"
-		onclick="return confirm('Sei sicuro di voler eliminare l\'associazione selezionata?')">
-	<hr>
+		<hr>
+		<input type="submit" name="btnMode" value="Inserisci"> <input
+			type="submit" name="btnMode" value="Elimina"
+			onclick="return confirm('Sei sicuro di voler eliminare l\'associazione selezionata?')">
+		<hr>
 
-    <%= (request.getAttribute("messaggio") == null) ? "" : request.getAttribute("messaggio").toString() %>
+		<%= (request.getAttribute("messaggio") == null) ? "" : request.getAttribute("messaggio").toString() %>
 
 	</form>
 	<a href="userLogged.jsp">Torna alla Home</a>

@@ -72,7 +72,6 @@ public class Allarme {
 			params[0] = velocita;
 			params[1] = seriale;
 			if (driver.update(query, params) != 1)
-				// TODO: Gestione errore
 				System.err.println("Errore inserimento");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -144,7 +143,6 @@ public class Allarme {
 				params[0] = email;
 				break;
 			default:
-				// TODO: Gestione errore
 				System.err.println("Errore inserimento");
 			}
 			rs = driver.execute(query, params);
