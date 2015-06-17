@@ -40,40 +40,44 @@
 	<p>Visualizza gli allarmi attivati dal veicolo selezionato</p>
 
 	<form>
-		<table>
-			<tr>
-				<td>Posizione</td>
-			</tr>
-			<%
+		<table order="1" cellpadding="1" cellspacing="5">
+			<thead>
+				<tr>
+					<td>Posizione</td>
+				</tr>
+			</thead>
+			<tbody>
+				<%
 				List<Storico> allarmi = Storico.getAllarmi(currentVeicolo);
 			%>
 
-			<%
+				<%
 				for (Storico a : allarmi) {
 			%>
-			<tr>
-				<td><%="Guidatore"%></td>
-				<td><%="Data e Ora"%></td>
-				<td><%="Posizione"%></td>
-				<td><%="Velocità"%></td>
-			</tr>
-			<tr>
-				<td><%=currentUser%></td>
-				<td><%=a.getIstante()%></td>
-				<td><%=a.getPosizione()%></td>
-				<td><%=a.getVelocita()%></td>
-			</tr>
-			<%
+				<tr>
+					<td><%="Guidatore"%></td>
+					<td><%="Data e Ora"%></td>
+					<td><%="Posizione"%></td>
+					<td><%="Velocità"%></td>
+				</tr>
+				<tr>
+					<td><%=currentUser%></td>
+					<td><%=a.getIstante()%></td>
+					<td><%=a.getPosizione()%></td>
+					<td><%=a.getVelocita()%></td>
+				</tr>
+				<%
 				}
 			%>
+			</tbody>
 		</table>
 	</form>
-	</br>
-	</br>
-	</br>
+	<hr>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+ <input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>

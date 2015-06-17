@@ -36,35 +36,37 @@
 	<p>Selezionare una data per visualizzare il percorso effettuato</p>
 
 	<form action="StoricoDataServlet" method="POST">
-		<table>
-			<tr>
-				<td>Date in cui il mezzo è stato utilizzato</td>
-			</tr>
-			<%
+		<table order="1" cellpadding="1" cellspacing="5">
+			<thead>
+				<tr>
+					<td>Date in cui il mezzo è stato utilizzato</td>
+				</tr>
+			</thead>
+			<tbody>
+				<%
 				List<Date> listaDate = Storico.getUserVeicoloDate(currentVeicolo);
 			%>
 
 
-			<%
+				<%
 				for (Date data : listaDate) {
 			%>
-			<tr>
-				<td><input type="submit" name="data" value="<%=data%>"></td>
-			</tr>
+				<tr>
+					<td><input type="submit" name="data" value="<%=data%>"></td>
+				</tr>
 
-			<%
+				<%
 				}
 			%>
-
-
+			</tbody>
 		</table>
 	</form>
-	</br>
-	</br>
-	</br>
+	<hr>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+ <input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>

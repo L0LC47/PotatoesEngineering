@@ -72,9 +72,12 @@ html, body, #map-canvas {
 		Posizione attuale del veicolo selezionato:
 		<%=pos %></h3>
 	<div id="map-canvas"></div>
+	<hr>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+ <input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>

@@ -27,38 +27,40 @@
 	<p>Selezionare un veicolo per vedere il video</p>
 
 	<form action="VideoServlet" method="POST">
-		<table>
+		<table order="1" cellpadding="1" cellspacing="5">
 			<tr>
 				<td>Targa</td>
 				<td>Guidatore</td>
 				<td>Marca</td>
 				<td>Modello</td>
-
 			</tr>
-			<%
+			</thead>
+			<tbody>
+				<%
 				List<Veicolo> listaVeicoli = Usr.getUserVeicoliUtente(currentUser);
 			%>
-			<%
+				<%
 				for (Veicolo veicolo : listaVeicoli) {
 			%>
-			<tr>
-				<td><input type="submit" name="targa"
-					value="<%=veicolo.getTarga()%>"></td>
-				<td><%=veicolo.getGuidatore()%></td>
-				<td><%=veicolo.getMarca()%></td>
-				<td><%=veicolo.getModello()%></td>
-			</tr>
-			<%
+				<tr>
+					<td><input type="submit" name="targa"
+						value="<%=veicolo.getTarga()%>"></td>
+					<td><%=veicolo.getGuidatore()%></td>
+					<td><%=veicolo.getMarca()%></td>
+					<td><%=veicolo.getModello()%></td>
+				</tr>
+				<%
 				}
 			%>
+			</tbody>
 		</table>
 	</form>
-	</br>
-	</br>
-	</br>
+	<hr>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+<input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>

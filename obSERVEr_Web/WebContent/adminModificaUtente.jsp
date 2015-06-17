@@ -46,11 +46,10 @@
 	<%=benvenuto %>
 	</br>
 	<form action="ModificaUtentiServlet" method="POST" name="formFiltro">
-		<table>
-			<tr>
-				<td>Email</td>
-				<td><input type="email" name="txtEmail" value="<%=email%>"
-					<%=disabled%> required></td>
+		<table order="1" cellpadding="1" cellspacing="5">
+			<td>Email</td>
+			<td><input type="email" name="txtEmail" value="<%=email%>"
+				<%=disabled%> required></td>
 			</tr>
 			<tr>
 				<td>Nome</td>
@@ -84,12 +83,11 @@
 			onclick="return confirm('<%=messaggio%>')">
 		<hr>
 	</form>
-	</br>
-	</br>
-	</br>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+<input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>

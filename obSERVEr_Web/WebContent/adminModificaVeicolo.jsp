@@ -46,11 +46,10 @@
 	<%=benvenuto%>
 	</br>
 	<form action="ModificaVeicoliServlet" method="POST" name="formFiltro">
-		<table>
-			<tr>
-				<td>Targa</td>
-				<td><input type="text" name="txtTarga" value="<%=targa%>"
-					<%=disabled%> required></td>
+		<table order="1" cellpadding="1" cellspacing="5">
+			<td>Targa</td>
+			<td><input type="text" name="txtTarga" value="<%=targa%>"
+				<%=disabled%> required></td>
 			</tr>
 			<tr>
 				<td>Marca</td>
@@ -69,12 +68,11 @@
 			onclick="return confirm('<%=messaggio%>')">
 		<hr>
 	</form>
-	</br>
-	</br>
-	</br>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+ <input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>

@@ -72,12 +72,11 @@
 		<hr>
 
 		<%= (request.getAttribute("messaggio") == null) ? "" : request.getAttribute("messaggio").toString() %>
-
-	</form>
-	<a href="userLogged.jsp">Torna alla Home</a>
-	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
-	</form>
-
+		<a href="userLogged.jsp">Torna alla Home</a>
+		<hr>
+		<form action="LogoutServlet" method="POST">
+ <input type="submit" name="Logout" value="Logout">
+		</form>
+		<hr>
 </body>
 </html>

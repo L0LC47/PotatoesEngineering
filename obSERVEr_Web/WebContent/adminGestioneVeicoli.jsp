@@ -29,33 +29,37 @@
 	Benvenuto nell'area di gestione veicoli
 	<%=currentUser%>.
 	<form action="GestioneVeicoliServlet" method="POST" name="formFiltro">
-		<table>
-			<tr>
-				<td>Targa</td>
-				<td>Marca</td>
-				<td>Modello</td>
-				<td>Gestore</td>
-				<td></td>
+		<table order="1" cellpadding="1" cellspacing="5">
+			<thead>
+				<tr>
+					<td>Targa</td>
+					<td>Marca</td>
+					<td>Modello</td>
+					<td>Gestore</td>
+					<td></td>
 
-			</tr>
-			<%
+				</tr>
+			</thead>
+			<tbody>
+				<%
 				List<Veicolo> listaVeicoli = Veicolo.getVeicoli();
 			%>
-			<%
+				<%
 				for (Veicolo v : listaVeicoli) {
 			%>
 
-			<tr>
-				<td><%=v.getTarga()%></td>
-				<td><%=v.getMarca()%></td>
-				<td><%=v.getModello()%></td>
-				<td><%=v.getGestore()%></td>
-				<td><input type="radio" name="rdbSelezione"
-					value="<%=v.getTarga()%>"></td>
-			</tr>
-			<%
+				<tr>
+					<td><%=v.getTarga()%></td>
+					<td><%=v.getMarca()%></td>
+					<td><%=v.getModello()%></td>
+					<td><%=v.getGestore()%></td>
+					<td><input type="radio" name="rdbSelezione"
+						value="<%=v.getTarga()%>"></td>
+				</tr>
+				<%
 				}
 			%>
+			</tbody>
 		</table>
 
 		<hr>
@@ -65,12 +69,11 @@
 			onclick="return confirm('Sei sicuro di voler eliminare il veicolo selezionato?')">
 		<hr>
 	</form>
-	</br>
-	</br>
-	</br>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+ <input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>

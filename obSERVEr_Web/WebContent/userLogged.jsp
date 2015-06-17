@@ -47,8 +47,10 @@
 		There is no spoon
 		<% } %>
 	</ul>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+<input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>

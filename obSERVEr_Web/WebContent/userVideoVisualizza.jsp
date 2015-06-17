@@ -36,12 +36,13 @@
 	<iframe width="960" height="720"
 		src="https://www.youtube-nocookie.com/embed/tIvBjXDOld0?autoplay=1&rel=0&controls=0&shoinfo=0&start=10"
 		frameborder="0"></iframe>
-	</br>
-	</br>
-	</br>
+	<br>
+	<hr>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+<input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>

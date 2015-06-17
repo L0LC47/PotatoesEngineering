@@ -27,34 +27,38 @@
 	Benvenuto nell'area di gestione utenti
 	<%=currentUser%>.
 	<form action="GestioneUtentiServlet" method="POST" name="formFiltro">
-		<table>
-			<tr>
-				<td>Email</td>
-				<td>Nome</td>
-				<td>Cognome</td>
-				<td>Liv.Privilegi</td>
-				<td></td>
+		<table order="1" cellpadding="1" cellspacing="5">
+			<thead>
+				<tr>
+					<td>Email</td>
+					<td>Nome</td>
+					<td>Cognome</td>
+					<td>Liv.Privilegi</td>
+					<td></td>
 
-			</tr>
-			<%
+				</tr>
+			</thead>
+			<tbody>
+				<%
 				List<Usr> listaUtenti = Usr.getUsers();
 			%>
-			<%
+				<%
 				for (Usr u : listaUtenti) {
 			%>
 
-			<tr>
-				<td><%=u.getEmail()%></td>
-				<td><%=u.getNome()%></td>
-				<td><%=u.getCognome()%></td>
-				<td><%=u.getGestore()%></td>
-				<td><input type="radio" name="rdbSelezione"
-					value="<%=u.getEmail()%>"></td>
+				<tr>
+					<td><%=u.getEmail()%></td>
+					<td><%=u.getNome()%></td>
+					<td><%=u.getCognome()%></td>
+					<td><%=u.getGestore()%></td>
+					<td><input type="radio" name="rdbSelezione"
+						value="<%=u.getEmail()%>"></td>
 
-			</tr>
-			<%
+				</tr>
+				<%
 				}
 			%>
+			</tbody>
 		</table>
 
 		<hr>
@@ -64,12 +68,11 @@
 			onclick="return confirm('Sei sicuro di voler eliminare l\'utente selezionato?')">
 		<hr>
 	</form>
-	</br>
-	</br>
-	</br>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+<input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>

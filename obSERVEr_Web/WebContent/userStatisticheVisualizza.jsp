@@ -60,15 +60,15 @@
 		Velocità media in movimento:
 		<%=session.getAttribute("velMedMov")%></p>
 	</br>
-	</br>
+	<hr>
 	<a href="userStatistiche.jsp">Torna alla pagina di selezione date e
 		veicolo</a>
 	</br>
-	</br>
-	</br>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+ <input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>

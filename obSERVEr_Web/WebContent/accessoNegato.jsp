@@ -14,6 +14,8 @@
 <body>
 	<h1>Non hai i privilegi per visualizzare questa pagina</h1>
 	</br>
+	<hr>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 </body>
 </html>

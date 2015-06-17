@@ -27,20 +27,17 @@
 	</br>
 	</br>
 	<h1><%=session.getAttribute("messaggio")%></h1>
-	</br>
-	</br>
+	<hr>
 	</br>
 	<a href="adminGestioneUtenti.jsp">Torna a gestione utenti</a>
 	</br>
-	</br>
-	</br>
 	<a href="adminGestioneVeicoli.jsp">Torna a gestione veicoli</a>
 	</br>
-	</br>
-	</br>
 	<a href="userLogged.jsp">Torna alla Home</a>
+	<hr>
 	<form action="LogoutServlet" method="POST">
-		</br> </br> </br> <input type="submit" name="Logout" value="Logout">
+<input type="submit" name="Logout" value="Logout">
 	</form>
+	<hr>
 </body>
 </html>
