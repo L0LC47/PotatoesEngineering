@@ -74,7 +74,7 @@ public final class DataSource { //PATTERN: Singleton
     }
 
     public String[] Query(String s, String serial) {
-        String[] res = new String[2];
+        String[] res = new String[3];
         ResultSet rs = null;
         try {
             PreparedStatement pstmt = connection.prepareStatement(s);
@@ -87,6 +87,7 @@ public final class DataSource { //PATTERN: Singleton
             if (rs.next()) {
                 res[0] = rs.getString(1); //user
                 res[1] = rs.getString(2); //targa
+                res[2] = rs.getInt(3)+""; //targa
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());//Result Set vuoto o non valido...");
