@@ -11,7 +11,7 @@ package it.univr.is.observer.services;
  * if the username and password inputted by the user are valid or not.
  * */
 
-import it.univr.is.observer.persistenza.Allarme;
+import it.univr.is.observer.persistenza.Observer;
 import it.univr.is.observer.persistenza.Usr_veicolo;
 
 import javax.servlet.ServletException;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LoginServlet
  */
-public class ImpostaAllarmiServlet extends HttpServlet {
+public class SMSServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, java.io.IOException {
@@ -32,24 +32,27 @@ public class ImpostaAllarmiServlet extends HttpServlet {
 
 		if (parametroSceltaMode.equalsIgnoreCase("Modifica")) {
 			String seriale = request.getParameter("rdbSelezione");
-			int velocita = Integer.parseInt(request.getParameter("velocita"));
-			if (velocita > 0) {
-				if (Allarme.setAllarme(velocita, seriale)) {
-					request.setAttribute("messaggio", "Allarme Impostato!");
+			int sms = Integer.parseInt(request.getParameter("intervallo"));
+
+			if (sms == 0 || sms == 1 || sms == 3 || sms == 6 || sms == 12
+					|| sms == 24) {
+
+				if (Observer.setSMS(sms, seriale)) {
+					request.setAttribute("messaggio", "SMS Impostato!");
 				} else {
 					request.setAttribute("messaggio", "Errore!");
 				}
-				request.getRequestDispatcher("gestoreImpostaAllarmi.jsp")
-						.forward(request, response);
+				request.getRequestDispatcher("gestoreImpostaSMS.jsp").forward(
+						request, response);
 			} else {
 				request.setAttribute("messaggio",
-						"Il valore della velocità può essere solo positivo.");
+						"Il valore dell'intervallo può essere solo 0, 1, 3, 6, 12, 24");
 				request.getRequestDispatcher("gestoreImpostaSMS.jsp").forward(
 						request, response);
 			}
 		} else {
 			request.setAttribute("messaggio", "ARGH!");
-			request.getRequestDispatcher("gestoreImpostaAllarmi.jsp").forward(
+			request.getRequestDispatcher("gestoreImpostaSMS.jsp").forward(
 					request, response);
 		}
 	}
