@@ -32,6 +32,7 @@
 		<table order="1" cellpadding="1" cellspacing="5">
 			<thead>
 				<tr>
+				    <td>Seriale</td>
 					<td>Targa</td>
 					<td>Marca</td>
 					<td>Modello</td>
@@ -49,6 +50,7 @@
 			%>
 
 				<tr>
+				    <td><%=Veicolo_observer.getAssociazioneCorrente(v.getTarga()).getSerial()%></td>
 					<td><%=v.getTarga()%></td>
 					<td><%=v.getMarca()%></td>
 					<td><%=v.getModello()%></td>

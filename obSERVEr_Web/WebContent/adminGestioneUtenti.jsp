@@ -33,6 +33,7 @@
 					<td>Email</td>
 					<td>Nome</td>
 					<td>Cognome</td>
+					<td>Telefono</td>
 					<td>Liv.Privilegi</td>
 					<td></td>
 
@@ -50,6 +51,7 @@
 					<td><%=u.getEmail()%></td>
 					<td><%=u.getNome()%></td>
 					<td><%=u.getCognome()%></td>
+					<td><%=u.getTelefono()%></td>
 					<td><%=u.getGestore()%></td>
 					<td><input type="radio" name="rdbSelezione"
 						value="<%=u.getEmail()%>"></td>

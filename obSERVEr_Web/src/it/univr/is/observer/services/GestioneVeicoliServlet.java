@@ -1,5 +1,6 @@
 package it.univr.is.observer.services;
 
+import it.univr.is.observer.persistenza.Usr_veicolo;
 import it.univr.is.observer.persistenza.Veicolo;
 
 import javax.servlet.ServletException;
@@ -29,6 +30,9 @@ public class GestioneVeicoliServlet extends HttpServlet {
 		if (parametroSceltaMode.equalsIgnoreCase("Elimina")) {
 			// Sei sicuro? --> Eliminazione effettuata con successo
 			// Elimina
+			
+			// XXX UNSAFE
+			Usr_veicolo.termina(parametroIdRecord);
 			if (Veicolo.eliminaVeicolo(parametroIdRecord)) {
 				if (parametroIdRecord.equals(request.getSession()
 						.getAttribute("currentSessionUser").toString()))

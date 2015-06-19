@@ -22,18 +22,20 @@ public class Usr {
 	private String nome;
 	private String cognome;
 	private String password;
+	private String telefono;
 	private int gestore;
 
 	// ==== Constructor
 	// ========================================================================
 
 	public Usr(String email, String nome, String cognome, String password,
-			int gestore) {
+			int gestore, String telefono) {
 		this.email = email;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.password = password;
 		this.gestore = gestore;
+		this.telefono = telefono;
 	}
 
 	public Usr(ResultSet rs) throws SQLException {
@@ -42,6 +44,7 @@ public class Usr {
 		this.cognome = rs.getString("cognome");
 		this.password = rs.getString("password");
 		this.gestore = rs.getInt("gestore");
+		this.telefono = rs.getString("telefono");
 	}
 
 	public Usr() {
@@ -88,7 +91,7 @@ public class Usr {
 			case 0:
 				query = "select uv.email, v.targa, v.marca, v.modello, v.gestore from "
 						+ "usr_veicolo uv, veicolo v where uv.targa = v.targa and "
-						+ "uv.inizio < current_date and (uv.fine >= current_date "
+						+ "uv.inizio <= current_date and (uv.fine >= current_date "
 						+ "OR uv.fine is null)";
 
 				params = null;
@@ -237,18 +240,19 @@ public class Usr {
 	 * @return
 	 */
 	public static boolean modificaUtente(String email, String nome,
-			String cognome, String password, String gestore) {
+			String cognome, String password, String gestore, String telefono) {
 		boolean res = false;
 		try {
 			MioDriver driver = MioDriver.getInstance();
 			String query = "UPDATE usr SET nome = ?, cognome = ?, password = ?,"
-					+ " gestore = ? WHERE email = ?";
-			Object[] params = new Object[5];
-			params[4] = email;
+					+ " gestore = ?, telefono = ? WHERE email = ?";
+			Object[] params = new Object[6];
+			params[5] = email;
 			params[0] = nome;
 			params[1] = cognome;
 			params[2] = password;
 			params[3] = Integer.parseInt(gestore);
+			params[4] = telefono;
 			// Se modifica 1 riga allora è andato a buon fine
 			if (driver.update(query, params) == 1)
 				res = true;
@@ -324,5 +328,13 @@ public class Usr {
 
 	public void setGestore(int gestore) {
 		this.gestore = gestore;
+	}
+	
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 }

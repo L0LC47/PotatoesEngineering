@@ -53,7 +53,8 @@ public class ModificaUtentiServlet extends HttpServlet {
 				request.getParameter("txtNome").toString(), request
 						.getParameter("txtCognome").toString(), request
 						.getParameter("txtPassword").toString(), request
-						.getParameter("txtGestore").toString())) {
+						.getParameter("txtGestore").toString(), request
+						.getParameter("txtTelefono").toString())) {
 			// Modifica effettuata con successo
 			request.getSession().setAttribute("messaggio",
 					"Modifica effettuata con successo!");

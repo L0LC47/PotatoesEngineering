@@ -41,7 +41,7 @@ public class Veicolo_observer {
 
 	// ==== Methods
 	// ========================================================================
-	
+
 	public Veicolo_observer(ResultSet rs) throws SQLException {
 		this.serial = rs.getString("serial");
 		this.targa = rs.getString("targa");
@@ -58,6 +58,61 @@ public class Veicolo_observer {
 			while (rs.next())
 				res.add(new Veicolo_observer(rs));
 		} catch (SQLException e) {
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
+
+	public static Veicolo_observer getAssociazioneCorrente(String targa) {
+		Veicolo_observer res = null;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "select * from veicolo_observer where fine is null and targa = ?";
+			Object[] values = new Object[1];
+			values[0] = targa;
+			ResultSet rs = driver.execute(query, values);
+			if (rs.next())
+				res = new Veicolo_observer(rs);
+		} catch (SQLException e) {
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
+
+	public static List<Observer> getObserverLiberi() {
+		List<Observer> res = new ArrayList<>();
+		try {
+			MioDriver driver = MioDriver.getInstance();
+
+			String query = "select * from observer o where o.serial not in "
+					+ "(select vo.serial from veicolo_observer vo where fine is null)";
+			ResultSet rs = driver.execute(query, null);
+			while (rs.next())
+				res.add(new Observer(rs.getString(1)));
+		} catch (SQLException e) {
+			System.out
+					.println("Select failed: An Exception has occurred! " + e);
+		}
+		return res;
+	}
+
+	public static boolean nuovaAssociazione(String seriale, String targa) {
+		boolean res = false;
+		try {
+			MioDriver driver = MioDriver.getInstance();
+			String query = "INSERT INTO veicolo_observer (serial, targa, inizio)"
+					+ " VALUES ( ?, ?, ?)";
+			Object[] params = new Object[3];
+			params[0] = seriale;
+			params[1] = targa;
+			params[2] = new java.sql.Date(System.currentTimeMillis());;
+			// Se modifica 1 riga allora è andato a buon fine
+			if (driver.update(query, params) == 1)
+				res = true;
+		} catch (SQLException e) {
+			res = false;
 			System.out
 					.println("Select failed: An Exception has occurred! " + e);
 		}

@@ -1,6 +1,7 @@
 package it.univr.is.observer.services;
 
 import it.univr.is.observer.persistenza.Veicolo;
+import it.univr.is.observer.persistenza.Veicolo_observer;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,6 +49,7 @@ public class ModificaVeicoliServlet extends HttpServlet {
 				request.getSession().getAttribute("veicoloSelezionato")
 						.toString(), request.getParameter("txtMarca")
 						.toString(), request.getParameter("txtModello")
+						.toString(), request.getParameter("txtGestore")
 						.toString())) {
 			// Modifica effettuata con successo
 			request.getSession().setAttribute("messaggio",
@@ -62,14 +64,27 @@ public class ModificaVeicoliServlet extends HttpServlet {
 	}
 
 	private boolean InsertVeicolo(HttpServletRequest request) {
-		if (Veicolo.inserisciVeicolo(request.getParameter("txtTarga")
-				.toString(), request.getParameter("txtMarca").toString(),
-				request.getParameter("txtModello").toString())) {
-			// Inserimento effettuato con successo
-			request.getSession().setAttribute("messaggio",
+		String targa = request.getParameter("txtTarga").toString();
+		String marca = request.getParameter("txtMarca").toString();
+		String modello = request.getParameter("txtModello").toString();
+		String gestore = request.getParameter("txtGestore").toString();
+		String seriale = request.getParameter("txtObserver").toString();
+		
+		if (Veicolo.inserisciVeicolo(targa, marca,modello,gestore)) {
+			if(Veicolo_observer.nuovaAssociazione(seriale, targa)){
+				// Inserimento effettuato con successo
+				request.getSession().setAttribute("messaggio",
 					"Inserimento effettuato con successo!");
-			return true;
-		} else {
+				return true;
+			} else {
+				Veicolo.eliminaVeicolo(targa);
+				// Inserimento non andato a buon fine, 
+				// elimino veicolo inserito precedentemente
+				request.getSession().setAttribute("messaggio",
+						"Inserimento non effettuato a causa di un errore!");
+				return false;
+			}
+		}else {
 			// Inserimento non andato a buon fine
 			request.getSession().setAttribute("messaggio",
 					"Inserimento non effettuato a causa di un errore!");
@@ -78,8 +93,8 @@ public class ModificaVeicoliServlet extends HttpServlet {
 	}
 
 	private boolean checkVeicolo(HttpServletRequest request) {
-		if (Veicolo
-				.checkInserimento(request.getParameter("txtTarga").toString())) {
+		if (Veicolo.checkInserimento(request.getParameter("txtTarga")
+				.toString())) {
 			// Utente esiste già
 			request.getSession().setAttribute(
 					"messaggio",

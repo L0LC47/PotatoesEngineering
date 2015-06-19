@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1" import="it.univr.is.observer.persistenza.*"
 	import="java.util.*" import="java.sql.*"%>
 <%
-	String currentUser = "", email = "", nome = "", cognome = "", livPrivilegi = "";
+	String currentUser = "", email = "", nome = "", cognome = "", livPrivilegi = "", telefono="";
 	String messaggio = "Sei sicuro di voler inserire il nuovo utente?", disabled = "";
 	String benvenuto = "Inserisci i dati per il nuovo utente ...";
 	int privileges = Integer.MAX_VALUE;
@@ -30,6 +30,7 @@
 		nome = utenteUpdate.getNome();
 		cognome = utenteUpdate.getCognome();
 		livPrivilegi += utenteUpdate.getGestore();
+	    telefono = utenteUpdate.getTelefono();
 		messaggio = "Sei sicuro di voler confermare le modifiche?";
 		disabled = "disabled";
 		benvenuto = "Edita i dati che intendi modificare.";
@@ -43,7 +44,7 @@
 <title>Gestione utenti</title>
 </head>
 <body>
-	<%=benvenuto %>
+	<%=benvenuto%>
 	</br>
 	<form action="ModificaUtentiServlet" method="POST" name="formFiltro">
 		<table order="1" cellpadding="1" cellspacing="5">
@@ -59,6 +60,11 @@
 			<tr>
 				<td>Cognome</td>
 				<td><input type="text" name="txtCognome" value="<%=cognome%>"
+					required></td>
+			</tr>
+			<tr>
+				<td>Telefono</td>
+				<td><input type="text" name="txtTelefono" value="<%=telefono%>"
 					required></td>
 			</tr>
 			<tr>
@@ -86,7 +92,7 @@
 	<a href="userLogged.jsp">Torna alla Home</a>
 	<hr>
 	<form action="LogoutServlet" method="POST">
-<input type="submit" name="Logout" value="Logout">
+		<input type="submit" name="Logout" value="Logout">
 	</form>
 	<hr>
 </body>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="it.univr.is.observer.persistenza.*"
-	import="java.util.*"%>
+    pageEncoding="ISO-8859-1" import="it.univr.is.observer.persistenza.*"
+    import="java.util.*"%>
 <%
     String currentUser = "";
 int privileges = Integer.MAX_VALUE;
@@ -39,13 +39,13 @@ else {
 <title>Posizione del veicolo nella data selezionata</title>
 <style>
 html, body, #map-canvas {
-	height: 400px;
-	margin: 0px;
-	padding: 0px
+    height: 400px;
+    margin: 0px;
+    padding: 0px
 }
 </style>
 <script
-	src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 <script>
     var directionDisplay;
     var directionsService = new google.maps.DirectionsService();
@@ -121,35 +121,35 @@ html, body, #map-canvas {
 </script>
 </head>
 <body>
-	<h3>Percorso effettuato dal veicolo nella data selezionata</h3>
-	<div id="map-canvas"></div>
+    <h3>Percorso effettuato dal veicolo nella data selezionata</h3>
+    <div id="map-canvas"></div>
 
-	<form>
-		<table order="1" cellpadding="1" cellspacing="5">
-			<thead>
-				<tr>
-					<td>Posizioni rilevate del veicolo nella data selezionata</td>
-				</tr>
-			</thead>
-			<tbody>
-				<%
+    <form>
+        <table order="1" cellpadding="1" cellspacing="5">
+            <thead>
+                <tr>
+                    <td>Posizioni rilevate del veicolo nella data selezionata</td>
+                </tr>
+            </thead>
+            <tbody>
+                <%
                 for (String s : storico) {
             %>
-				<tr>
-					<td><%=s%></td>
-				</tr>
-				<%
+                <tr>
+                    <td><%=s%></td>
+                </tr>
+                <%
                 }
             %>
-			</tbody>
-		</table>
-	</form>
-	<hr>
-	<a href="userLogged.jsp">Torna alla Home</a>
-	<hr>
-	<form action="LogoutServlet" method="POST">
+            </tbody>
+        </table>
+    </form>
+    <hr>
+    <a href="userLogged.jsp">Torna alla Home</a>
+    <hr>
+    <form action="LogoutServlet" method="POST">
 <input type="submit" name="Logout" value="Logout">
-	</form>
-	<hr>
+    </form>
+    <hr>
 </body>
 </html>

@@ -47,7 +47,7 @@ public class Veicolo {
 		this.marca = rs.getString("marca");
 		this.modello = rs.getString("modello");
 		this.gestore = rs.getString("gestore");
-		// TODO test Serve da qualche parte? Sì, ma ne possiamo parlare; per adesso metto una pezza ;)
+		// XXX test Serve da qualche parte? Sì, ma ne possiamo parlare; per adesso metto una pezza ;)
 		try{
 			this.guidatore = rs.getString("email");
 		}catch(SQLException e) {}
@@ -185,16 +185,17 @@ public class Veicolo {
 	 * @return true se la modifica è andata a buon fine
 	 */
 	public static boolean modificaVeicolo(String targa, String marca,
-			String modello) {
+			String modello, String gestore) {
 		boolean res = false;
 		try {
 			MioDriver driver = MioDriver.getInstance();
-			String query = "UPDATE veicolo SET marca = ?, modello = ? "
+			String query = "UPDATE veicolo SET marca = ?, modello = ?, gestore= ? "
 					+ "WHERE targa = ?";
-			Object[] params = new Object[3];
-			params[2] = targa;
+			Object[] params = new Object[4];
+			params[3] = targa;
 			params[0] = marca;
 			params[1] = modello;
+			params[2] = gestore;
 			// Se modifica 1 riga allora è andato a buon fine
 			if (driver.update(query, params) == 1)
 				res = true;
@@ -215,16 +216,17 @@ public class Veicolo {
 	 * @return true se l'inserimento è andato a buon fine
 	 */
 	public static boolean inserisciVeicolo(String targa, String marca,
-			String modello) {
+			String modello, String gestore) {
 		boolean res = false;
 		try {
 			MioDriver driver = MioDriver.getInstance();
-			String query = "INSERT INTO veicolo ( targa, marca, modello) "
-					+ "VALUES ( ?, ?, ?)";
-			Object[] params = new Object[3];
+			String query = "INSERT INTO veicolo (targa, marca, modello, gestore) "
+					+ "VALUES ( ?, ?, ?, ?)";
+			Object[] params = new Object[4];
 			params[0] = targa;
 			params[1] = marca;
 			params[2] = modello;
+			params[3] = gestore;
 			// Se modifica 1 riga allora è andato a buon fine
 			if (driver.update(query, params) == 1)
 				res = true;
