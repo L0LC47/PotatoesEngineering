@@ -35,7 +35,7 @@ public class SMSServlet extends HttpServlet {
 			int sms = Integer.parseInt(request.getParameter("intervallo"));
 
 			if (sms == 0 || sms == 1 || sms == 3 || sms == 6 || sms == 12
-					|| sms == 24) {
+					|| sms == 24 || sms == 30) {
 
 				if (Observer.setSMS(sms, seriale)) {
 					request.setAttribute("messaggio", "SMS Impostato!");
@@ -46,7 +46,7 @@ public class SMSServlet extends HttpServlet {
 						request, response);
 			} else {
 				request.setAttribute("messaggio",
-						"Il valore dell'intervallo può essere solo 0, 1, 3, 6, 12, 24");
+						"Il valore dell'intervallo può essere solo 0, 1, 3, 6, 12, 24, 30");
 				request.getRequestDispatcher("gestoreImpostaSMS.jsp").forward(
 						request, response);
 			}

@@ -21,6 +21,16 @@
 	</servlet>
 
 	<servlet-mapping>
+		<servlet-name>SMSServlet</servlet-name>
+		<url-pattern>/SMSServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SMSServlet</servlet-name>
+		<servlet-class>it.univr.is.observer.services.SMSServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
 		<servlet-name>GestioneVeicoliServlet</servlet-name>
 		<url-pattern>/GestioneVeicoliServlet</url-pattern>
 	</servlet-mapping>

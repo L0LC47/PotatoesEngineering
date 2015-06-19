@@ -47,13 +47,28 @@
 				<%
 					Veicolo v = Veicolo.getVeicoloData(vo.getTarga());
 						int SMS = Observer.getSMS(vo.getSerial());
+						String smsString = "there is no spoon!";
+						if (SMS == 0)
+							smsString = "Disattivato";
+						if (SMS == 30)
+							smsString = "30 minuti";
+						if (SMS == 1)
+							smsString = "1 Ora";
+						if (SMS == 3)
+							smsString = "3 Ore";
+						if (SMS == 6)
+							smsString = "6 Ore";
+						if (SMS == 12)
+							smsString = "12 Ore";
+						if (SMS == 24)
+							smsString = "24 Ore";
 				%>
 				<tr>
 					<td><%=vo.getSerial()%></td>
 					<td><%=v.getTarga()%></td>
 					<td><%=v.getMarca()%></td>
 					<td><%=v.getModello()%></td>
-					<td><%=SMS%></td>
+					<td><%=smsString%></td>
 					<td style="text-align: center;"><input name="rdbSelezione"
 						type="radio" value="<%=vo.getSerial()%>" /></td>
 				</tr>
@@ -71,18 +86,18 @@
 			<option value='6'>6 ore
 			<option value='12'>12 ore
 			<option value='24'>24 ore
-		</select>
-	<input type="submit"name="btnMode" value="Modifica"></f
+		</select> <input type="submit" name="btnMode" value="Modifica">
+		</f
 			orm>
 
-	<%=(request.getAttribute("messaggio") == null) ? ""
+		<%=(request.getAttribute("messaggio") == null) ? ""
 					: request.getAttribute("messaggio").toString()%>
-	<hr>
-	<a href="userLogged.jsp">Torna alla Home</a>
-	<hr>
-	<form action="LogoutServlet" method="POST">
-		<input type="submit" name="Logout" value="Logout">
-	</form>
-	<hr>
+		<hr>
+		<a href="userLogged.jsp">Torna alla Home</a>
+		<hr>
+		<form action="LogoutServlet" method="POST">
+			<input type="submit" name="Logout" value="Logout">
+		</form>
+		<hr>
 </body>
 </html>

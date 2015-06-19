@@ -31,14 +31,14 @@
 		<%if(privileges == 0) {%>
 		<li><a href="adminGestioneUtenti.jsp">Gestisci Utenti</a></li>
 		<li><a href="adminGestioneVeicoli.jsp">Gestisci Veicoli</a></li>
-		<li><hr></li>
+		<hr>
 		<%} if(privileges <= 1){ %>
 		<li><a href="gestoreAssociaUtentiVeicoli.jsp">Associa Utente
 				a Veicolo</a></li>
 		<li><a href="gestoreImpostaAllarmi.jsp">Imposta Allarme
 				Velocità</a></li>
 		<li><a href="gestoreImpostaSMS.jsp">Imposta SMS e e-mail di posizione</a></li>
-		<li><hr></li>
+		<hr>
 		<%} if(privileges <= 2) {%>
 		<li><a href="userPosizione.jsp">Visualizza Posizione Veicoli</a></li>
 		<li><a href="userAllarmi.jsp">Controlla Allarmi Velocità</a></li>
@@ -46,7 +46,7 @@
 				Veicoli</a></li>
 		<li><a href="userVideo.jsp">Visualizza Video</a></li>
 		<li><a href="userStatistiche.jsp">Visualizza Statistiche</a></li>
-		<li><hr></li>
+		<hr>
 		<li><a href="/files/obSERVEr_InformativaPrivacy.pdf" download><bold>Informativa sulla privacy</bold> </a></li>
 		<%} else {%>
 		There is no spoon
