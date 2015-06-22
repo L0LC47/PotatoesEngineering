@@ -47,7 +47,7 @@
 		<li><a href="userVideo.jsp">Visualizza Video</a></li>
 		<li><a href="userStatistiche.jsp">Visualizza Statistiche</a></li>
 		<hr>
-		<li><a href="/files/obSERVEr_InformativaPrivacy.pdf" download><bold>Informativa sulla privacy</bold> </a></li>
+		<li><a href="files/obSERVEr_InformativaPrivacy.pdf"><bold>Informativa sulla privacy</bold> </a></li>
 		<%} else {%>
 		There is no spoon
 		<% } %>
