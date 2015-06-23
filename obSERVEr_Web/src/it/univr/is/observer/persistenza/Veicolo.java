@@ -1,7 +1,7 @@
 package it.univr.is.observer.persistenza;
 
 import it.univr.is.database.MioDriver;
-import it.univr.is.observer.logica.Statistica;
+import it.univr.is.observer.stat.Statistica;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

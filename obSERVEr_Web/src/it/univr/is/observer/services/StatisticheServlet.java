@@ -11,11 +11,11 @@ package it.univr.is.observer.services;
  * if the username and password inputted by the user are valid or not.
  * */
 
-import it.univr.is.observer.logica.StatisticaMax;
-import it.univr.is.observer.logica.StatisticaMedia;
-import it.univr.is.observer.logica.StatisticaMediaMovimento;
-import it.univr.is.observer.logica.StatisticaMin;
 import it.univr.is.observer.persistenza.Veicolo;
+import it.univr.is.observer.stat.StatisticaMax;
+import it.univr.is.observer.stat.StatisticaMedia;
+import it.univr.is.observer.stat.StatisticaMediaMovimento;
+import it.univr.is.observer.stat.StatisticaMin;
 
 import java.util.List;
 

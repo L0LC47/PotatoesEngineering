@@ -1,8 +1,8 @@
 package it.univr.is.observer.test;
 
 import static org.junit.Assert.assertEquals;
-import it.univr.is.observer.logica.Statistica;
-import it.univr.is.observer.logica.StatisticaMax;
+import it.univr.is.observer.stat.Statistica;
+import it.univr.is.observer.stat.StatisticaMax;
 
 import java.util.ArrayList;
 import java.util.List;

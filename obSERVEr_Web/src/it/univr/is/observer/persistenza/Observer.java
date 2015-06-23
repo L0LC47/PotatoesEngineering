@@ -68,7 +68,7 @@ public class Observer {
 			MioDriver driver = MioDriver.getInstance();
 			String query = "update observer set sms = ? where serial = ?";
 			Object[] params = new Object[2];
-			params[0] = sms;
+			params[0] = sms;//Integer.valueOf(sms);
 			params[1] = seriale;
 			if (driver.update(query, params) != 1) {
 				System.err.println("Errore inserimento");

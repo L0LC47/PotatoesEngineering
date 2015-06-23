@@ -1,4 +1,4 @@
-package it.univr.is.observer.logica;
+package it.univr.is.observer.stat;
 
 import java.util.List;
 
